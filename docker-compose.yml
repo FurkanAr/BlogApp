@@ -1,0 +1,15 @@
+version: "2"
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongo-container
+    hostname: localhost
+    ports:
+      - 27017:27017
+  docker-notification:
+    build: Notification/
+    container_name: Notification-container
+    hostname: localhost
+    ports:
+      - 8082:8082
+
