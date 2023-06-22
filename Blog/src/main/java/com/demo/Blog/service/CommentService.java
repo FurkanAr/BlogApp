@@ -1,6 +1,9 @@
 package com.demo.Blog.service;
 
 import com.demo.Blog.converter.CommentConverter;
+import com.demo.Blog.exception.comment.CommentNotFoundException;
+import com.demo.Blog.exception.membership.MembershipIsExpiredException;
+import com.demo.Blog.exception.messages.Messages;
 import com.demo.Blog.model.Comment;
 import com.demo.Blog.model.Membership;
 import com.demo.Blog.model.Post;
@@ -12,6 +15,7 @@ import com.demo.Blog.response.CommentResponse;
 import com.demo.Blog.utils.MembershipUtil;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,15 +38,12 @@ public class CommentService {
 
     public List<CommentResponse> getAllCommentsWithParam(Optional<Long> userId, Optional<Long> postId) {
 
-        User user = userService.findUserById(userId.get());
-        Post post = postService.getPostById(postId.get());
-
         if(userId.isPresent() && postId.isPresent()){
-            return commentConverter.convert(commentRepository.findByUserIdAndPostId(user.getId(), post.getId()));
+            return commentConverter.convert(commentRepository.findByUserIdAndPostId(userId.get(), postId.get()));
         } else if (userId.isPresent()) {
-            return commentConverter.convert(commentRepository.findByUserId(user.getId()));
+            return commentConverter.convert(commentRepository.findByUserId(userId.get()));
         } else if (postId.isPresent()){
-            return commentConverter.convert(commentRepository.findByPostId(post.getId()));
+            return commentConverter.convert(commentRepository.findByPostId(postId.get()));
         }
         return commentConverter.convert(commentRepository.findAll());
 
@@ -53,7 +54,8 @@ public class CommentService {
     }
 
     public Comment getCommentById(Long commentId){
-        return commentRepository.findById(commentId).orElse(null);
+        return commentRepository.findById(commentId).orElseThrow(() ->
+                new CommentNotFoundException(Messages.Comment.NOT_EXISTS_BY_ID + commentId));
     }
 
     public CommentResponse createComment(CommentRequest newComment) {
@@ -61,7 +63,7 @@ public class CommentService {
 
         if (!MembershipUtil.isMembershipActive(membership)) {
             membershipService.deleteMembershipById(membership.getId());
-            throw new RuntimeException("Membership is expired");
+            throw new MembershipIsExpiredException(Messages.Membership.EXPIRED);
         }
 
         User user = userService.findUserById(newComment.getUserId());
@@ -73,6 +75,7 @@ public class CommentService {
     public CommentResponse updateComment(Long commentId, CommentUpdateRequest commentUpdateRequest) {
         Comment comment = getCommentById(commentId);
         comment.setText(commentUpdateRequest.getText());
+        comment.setUpdateDate(LocalDateTime.now());
         return commentConverter.convert(commentRepository.save(comment));
     }
 
@@ -83,6 +86,7 @@ public class CommentService {
     }
 
     public void deleteByUserId(Long userId) {
+        userService.findUserById(userId);
         List<Comment> comments = commentRepository.findByUserId(userId);
         commentRepository.deleteAll(comments);
     }

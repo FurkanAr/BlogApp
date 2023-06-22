@@ -3,6 +3,7 @@ package com.demo.Blog.controller;
 import com.demo.Blog.request.PostRequest;
 import com.demo.Blog.request.PostUpdateRequest;
 import com.demo.Blog.response.PostResponse;
+import com.demo.Blog.response.PostUpdateResponse;
 import com.demo.Blog.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +41,8 @@ public class PostController {
     }
 
     @PutMapping("/{postId}")
-    public ResponseEntity<PostResponse> updatePost(@PathVariable Long postId, @RequestBody PostUpdateRequest postUpdateRequest) {
-        PostResponse postResponse = postService.updatePost(postId, postUpdateRequest);
+    public ResponseEntity<PostUpdateResponse> updatePost(@PathVariable Long postId, @RequestBody PostUpdateRequest postUpdateRequest) {
+        PostUpdateResponse postResponse = postService.updatePost(postId, postUpdateRequest);
         return ResponseEntity.ok(postResponse);
     }
 

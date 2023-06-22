@@ -1,6 +1,9 @@
 package com.demo.Blog.service;
 
 import com.demo.Blog.converter.LikeConverter;
+import com.demo.Blog.exception.like.LikeNotFoundException;
+import com.demo.Blog.exception.membership.MembershipIsExpiredException;
+import com.demo.Blog.exception.messages.Messages;
 import com.demo.Blog.model.Like;
 import com.demo.Blog.model.Membership;
 import com.demo.Blog.model.Post;
@@ -48,15 +51,15 @@ public class LikeService {
     }
 
     public LikeResponse createLike(LikeRequest likeRequest) {
+        User user = userService.findUserById(likeRequest.getUserId());
+        Post post = postService.getPostById(likeRequest.getPostId());
         Membership membership = membershipService.getMembershipByUserId(likeRequest.getUserId());
 
         if (!MembershipUtil.isMembershipActive(membership)) {
             membershipService.deleteMembershipById(membership.getId());
-            throw new RuntimeException("Membership is expired");
+            throw new MembershipIsExpiredException(Messages.Membership.EXPIRED);
         }
-        
-        User user = userService.findUserById(likeRequest.getUserId());
-        Post post = postService.getPostById(likeRequest.getPostId());
+
         Like like = likeRepository.save(likeConverter.convert(post,user));
         return likeConverter.convert(like);
     }
@@ -72,10 +75,12 @@ public class LikeService {
     }
 
     public Like getLikeById(Long likeId){
-        return likeRepository.findById(likeId).orElse(null);
+        return likeRepository.findById(likeId).orElseThrow(() ->
+                new LikeNotFoundException(Messages.Like.NOT_EXISTS_BY_ID + likeId));
     }
 
     public void deleteByUserId(Long userId) {
+        userService.findUserById(userId);
         List<Like> likes = likeRepository.findAllByUserId(userId);
         likeRepository.deleteAll(likes);
     }

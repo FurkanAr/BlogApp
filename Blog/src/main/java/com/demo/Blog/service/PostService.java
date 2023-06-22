@@ -1,15 +1,19 @@
 package com.demo.Blog.service;
 
 import com.demo.Blog.converter.PostConverter;
+import com.demo.Blog.exception.membership.MembershipIsExpiredException;
+import com.demo.Blog.exception.messages.Messages;
+import com.demo.Blog.exception.post.PostNotFoundException;
 import com.demo.Blog.model.Membership;
 import com.demo.Blog.model.Post;
 import com.demo.Blog.model.Tag;
-import com.demo.Blog.model.User;
 import com.demo.Blog.repository.PostRepository;
 import com.demo.Blog.request.PostRequest;
 import com.demo.Blog.request.PostUpdateRequest;
 import com.demo.Blog.response.PostResponse;
+import com.demo.Blog.response.PostUpdateResponse;
 import com.demo.Blog.utils.MembershipUtil;
+import com.demo.Blog.utils.PostUtil;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -35,31 +39,19 @@ public class PostService {
     }
 
     public PostResponse createPost(PostRequest newPost) {
+        //User user = userService.findUserById(newPost.getUserId());
         Membership membership = membershipService.getMembershipByUserId(newPost.getUserId());
-        User user = userService.findUserById(newPost.getUserId());
-        List<Tag> tags = tagService.findAllById(newPost.getTagIds());
-
-        LocalDate now = LocalDate.now();
-        LocalDate firstDay = now.with(TemporalAdjusters.firstDayOfMonth());
-        LocalDate lastDay = now.with(TemporalAdjusters.lastDayOfMonth());
 
         if (!MembershipUtil.isMembershipActive(membership)) {
             membershipService.deleteMembershipById(membership.getId());
-            throw new RuntimeException("Membership is expired");
+            throw new MembershipIsExpiredException(Messages.Membership.EXPIRED);
         }
-        ;
-        // int count = postRepository.findAllByPublicationDateBetweenByUserId(user.getId(), firstDay, lastDay).size();
-        int count = postRepository.CountAllByPublicationDateBetweenByUserId(user.getId(), firstDay, lastDay);
-        System.out.println("Number of post count: " + count);
 
-        if (count >= 10)
-            throw new RuntimeException("User already has 10 post");
+        List<Tag> tags = tagService.findAllById(newPost.getTagIds());
 
-        Post post = postRepository.save(postConverter.convert(newPost, user, tags));
+        checkUserCanCreateOrNotPost(membership.getUser().getId());
 
-        int afterCount = postRepository.CountAllByPublicationDateBetweenByUserId(user.getId(), firstDay, lastDay);
-
-        System.out.println("Number of post afterCount: " + afterCount);
+        Post post = postRepository.save(postConverter.convert(newPost, membership.getUser(), tags));
 
         return postConverter.convert(post);
     }
@@ -81,16 +73,15 @@ public class PostService {
         return postConverter.convert(getPostById(postId));
     }
 
-    public PostResponse updatePost(Long postId, PostUpdateRequest postUpdateRequest) {
+    public PostUpdateResponse updatePost(Long postId, PostUpdateRequest postUpdateRequest) {
         Post post = getPostById(postId);
-        post.setText(postUpdateRequest.getText());
-        post.setTitle(postUpdateRequest.getTitle());
-        post.setPicture(postUpdateRequest.getPicture());
-        return postConverter.convert(postRepository.save(post));
+        Post updatedPost = postConverter.update(post, postUpdateRequest);
+        return postConverter.update(postRepository.save(updatedPost));
     }
 
     public Post getPostById(Long postId) {
-        return postRepository.findById(postId).orElse(null);
+        return postRepository.findById(postId).orElseThrow(() ->
+                new PostNotFoundException(Messages.Post.NOT_EXISTS_BY_ID + postId));
     }
 
     public String deletePostById(Long postId) {
@@ -100,8 +91,19 @@ public class PostService {
     }
 
     public void deleteByUserId(Long userId) {
+        userService.findUserById(userId);
         List<Post> posts = postRepository.findAllByUserId(userId);
         postRepository.deleteAll(posts);
+    }
+
+    private void checkUserCanCreateOrNotPost(Long userId) {
+        LocalDate now = LocalDate.now();
+        LocalDate firstDay = now.with(TemporalAdjusters.firstDayOfMonth());
+        LocalDate lastDay = now.with(TemporalAdjusters.lastDayOfMonth());
+
+        int count = postRepository.CountAllByPublicationDateBetweenByUserId(userId, firstDay, lastDay);
+
+        PostUtil.checkUserNumberOfPosts(count);
     }
 
     public List<PostResponse> getPostByTag(String tag) {

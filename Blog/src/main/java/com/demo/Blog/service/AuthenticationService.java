@@ -4,6 +4,7 @@ import com.demo.Blog.config.rabbitMQ.RabbitMQMailConfiguration;
 import com.demo.Blog.converter.AuthConverter;
 import com.demo.Blog.converter.MailConverter;
 import com.demo.Blog.converter.UserConverter;
+import com.demo.Blog.exception.messages.Messages;
 import com.demo.Blog.exception.user.UserEmailAlreadyInUseException;
 import com.demo.Blog.model.User;
 import com.demo.Blog.repository.UserRepository;
@@ -52,8 +53,7 @@ public class AuthenticationService {
     public AuthResponse save(UserRequest userRequest) {
         Optional<User> foundUser = userRepository.findByEmail(userRequest.getEmail());
         if (foundUser.isPresent())
-            throw new UserEmailAlreadyInUseException("User already has account by given email: "
-                    + userRequest.getEmail());
+            throw new UserEmailAlreadyInUseException(Messages.User.EXIST + userRequest.getEmail());
 
         User savedUser = userRepository.save(userConverter.convert(userRequest));
 
@@ -70,12 +70,10 @@ public class AuthenticationService {
 
 
     public AuthResponse login(LoginRequest loginRequest) {
-        User foundUser = userRepository.findByUserName(loginRequest.getUserName())
-                .orElseThrow(() -> new UsernameNotFoundException("User cannot find with given username: "
-                        + loginRequest.getUserName()));
+        User foundUser = userRepository.findByUserName(loginRequest.getUserName()).orElseThrow(()
+                -> new UsernameNotFoundException(Messages.User.NOT_EXISTS + loginRequest.getUserName()));
 
-        UsernamePasswordAuthenticationToken authToken =
-                new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassword());
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassword());
 
         authenticationManager.authenticate(authToken);
 

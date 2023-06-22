@@ -1,7 +1,10 @@
 package com.demo.Blog.service;
 
 import com.demo.Blog.converter.TagConverter;
-import com.demo.Blog.model.Post;
+import com.demo.Blog.exception.tag.TagNotFoundGivenTagNameException;
+import com.demo.Blog.exception.messages.Messages;
+import com.demo.Blog.exception.tag.TagAlreadyInUseException;
+import com.demo.Blog.exception.tag.TagNotFoundException;
 import com.demo.Blog.model.Tag;
 import com.demo.Blog.repository.TagRepository;
 import com.demo.Blog.request.TagRequest;
@@ -28,7 +31,7 @@ public class TagService {
     public TagResponse createTag(TagRequest tagRequest) {
         Optional<Tag> foundTag = tagRepository.findByName(tagRequest.getName());
         if (foundTag.isPresent()){
-            throw new RuntimeException("tag already created");
+            throw new TagAlreadyInUseException(Messages.TAG.EXIST + tagRequest);
         }
         Tag tag = tagRepository.save(tagConverter.convert(tagRequest));
         return tagConverter.convert(tag);
@@ -40,18 +43,19 @@ public class TagService {
 
     }
 
-    public List<Tag> findAllById(List<Long> tagIds) {
+    protected List<Tag> findAllById(List<Long> tagIds) {
         tagIds.stream().forEach(id -> {
             if(!tagRepository.existsById(id)){
-                throw new RuntimeException("Not found Tag  with id = " + id);
+                throw new TagNotFoundException(Messages.TAG.NOT_EXISTS_BY_ID + id);
             }
         });
        return tagRepository.findAllById(tagIds);
     }
 
 
-    public Long findByName(String tag) {
-        Tag foundTag = tagRepository.findByName(tag).orElseThrow(() -> new RuntimeException("tag not found"));
+    protected Long findByName(String tag) {
+        Tag foundTag = tagRepository.findByName(tag).orElseThrow(() ->
+                new TagNotFoundGivenTagNameException(Messages.TAG.NOT_EXISTS_BY_NAME + tag));
         return foundTag.getId();
     }
 }

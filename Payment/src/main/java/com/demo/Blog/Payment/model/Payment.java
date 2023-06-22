@@ -13,7 +13,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Column(name = "create_date")
     private LocalDateTime createdDate;
     @Column(name = "user_id")
@@ -40,7 +40,7 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(Integer id, LocalDateTime createdDate, Long userId, String userName, PaymentType paymentType, Double price, String userAccountNumber, String userCardNumber, PaymentStatus status, String message) {
+    public Payment(Long id, LocalDateTime createdDate, Long userId, String userName, PaymentType paymentType, Double price, String userAccountNumber, String userCardNumber, PaymentStatus status, String message) {
         this.id = id;
         this.createdDate = createdDate;
         this.userId = userId;
@@ -53,11 +53,11 @@ public class Payment {
         this.message = message;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

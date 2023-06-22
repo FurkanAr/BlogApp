@@ -28,7 +28,6 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 authException.getMessage(),
                 HttpStatus.UNAUTHORIZED.value(),
-                LocalDateTime.now().toString(),
                 request.getServletPath());
 
         PrintWriter writer = response.getWriter();

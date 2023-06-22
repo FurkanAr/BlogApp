@@ -7,6 +7,9 @@ import com.demo.Blog.client.response.PaymentResponse;
 import com.demo.Blog.config.rabbitMQ.RabbitMQMailConfiguration;
 import com.demo.Blog.converter.MailConverter;
 import com.demo.Blog.converter.MembershipConverter;
+import com.demo.Blog.exception.membership.MembershipNotFoundByUserIdException;
+import com.demo.Blog.exception.membership.MembershipNotFoundException;
+import com.demo.Blog.exception.messages.Messages;
 import com.demo.Blog.model.CardInfo;
 import com.demo.Blog.model.Membership;
 import com.demo.Blog.model.User;
@@ -18,7 +21,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -27,7 +30,7 @@ public class MembershipService {
     @Value("${membership.renewed.mail.message}")
     private String MEMBERSHIP_RENEWED;
     @Value("${membership.created.mail.message}")
-    private  String MEMBERSHIP_CREATED;
+    private String MEMBERSHIP_CREATED;
 
     private final CardService cardService;
     private final UserService userService;
@@ -53,7 +56,7 @@ public class MembershipService {
         this.mailConverter = mailConverter;
     }
 
-    public String createMembershipPayByCard(PaymentCardGetRequest paymentCardGetRequest) {
+    public PaymentResponse createMembershipPayByCard(PaymentCardGetRequest paymentCardGetRequest) {
         User user = userService.findUserById(paymentCardGetRequest.getUserId());
 
         MembershipUtil.checkMembership(user.getMembership());
@@ -62,39 +65,18 @@ public class MembershipService {
 
         PaymentResponse paymentResponse = paymentServiceClient.create(paymentCardSendRequest);
 
-        if(MembershipUtil.checkPaymentResponse(paymentResponse))
-            return paymentResponse.getMessage();
+        MembershipUtil.checkPaymentResponse(paymentResponse);
 
         membershipRepository.save(membershipConverter.convert(user));
-        MailRequest mailRequest = mailConverter.convert(user, MEMBERSHIP_CREATED);
 
-        rabbitTemplate.convertAndSend(rabbitMQMailConfiguration.getQueueName(), mailRequest );
-        cardService.saveCard(paymentCardGetRequest,user);
+        rabbitHelper(user, MEMBERSHIP_CREATED);
 
-        return paymentResponse.getMessage();
+        cardService.saveCard(paymentCardGetRequest, user);
+
+        return paymentResponse;
     }
 
-    public String renewMembershipCardRequest(RenewMembershipCardRequest renewMembershipRequest) {
-        Membership membership = getMembershipByUserId(renewMembershipRequest.getUserId());
-        CardInfo cardInfo = cardService.getCardByUserId(renewMembershipRequest.getUserId());
-
-        PaymentCardSendRequest paymentCardSendRequest = paymentConverter.getCardInfoForPayment(membership, cardInfo);
-        PaymentResponse paymentResponse = paymentServiceClient.create(paymentCardSendRequest);
-
-        if(MembershipUtil.checkPaymentResponse(paymentResponse))
-            return paymentResponse.getMessage();
-
-        extractMembershipExpireDate(membership);
-
-        membershipRepository.save(membership);
-
-        MailRequest mailRequest = mailConverter.convert(membership.getUser(), MEMBERSHIP_RENEWED);
-        rabbitTemplate.convertAndSend(rabbitMQMailConfiguration.getQueueName(), mailRequest);
-
-        return MEMBERSHIP_RENEWED;
-    }
-
-    public String createMembershipPayByTransfer(PaymentTransferGetRequest paymentTransferGetRequest) {
+    public PaymentResponse createMembershipPayByTransfer(PaymentTransferGetRequest paymentTransferGetRequest) {
         User user = userService.findUserById(paymentTransferGetRequest.getUserId());
 
         MembershipUtil.checkMembership(user.getMembership());
@@ -103,58 +85,62 @@ public class MembershipService {
 
         PaymentResponse paymentResponse = paymentServiceClient.create(paymentTransferSendRequest);
 
-        if(MembershipUtil.checkPaymentResponse(paymentResponse))
-            return paymentResponse.getMessage();
+        MembershipUtil.checkPaymentResponse(paymentResponse);
 
         membershipRepository.save(membershipConverter.convert(user));
 
-        MailRequest mailRequest = mailConverter.convert(user, MEMBERSHIP_CREATED);
-        rabbitTemplate.convertAndSend(rabbitMQMailConfiguration.getQueueName(), mailRequest);
+        rabbitHelper(user, MEMBERSHIP_CREATED);
 
-        return paymentResponse.getMessage();
+        return paymentResponse;
     }
 
-    public String renewMembershipTransferRequest(PaymentTransferGetRequest paymentTransferGetRequest) {
-        Membership membership =getMembershipByUserId(paymentTransferGetRequest.getUserId());
+
+    public PaymentResponse renewMembershipCardRequest(RenewMembershipCardRequest renewMembershipRequest) {
+        Membership membership = getMembershipByUserId(renewMembershipRequest.getUserId());
+        CardInfo cardInfo = cardService.getCardByUserId(renewMembershipRequest.getUserId());
+
+        PaymentCardSendRequest paymentCardSendRequest = paymentConverter.getCardInfoForPayment(membership, cardInfo);
+
+        PaymentResponse paymentResponse = paymentServiceClient.create(paymentCardSendRequest);
+
+        MembershipUtil.checkPaymentResponse(paymentResponse);
+
+        MembershipUtil.extractMembershipExpireDate(membership);
+
+        membershipRepository.save(membership);
+
+        rabbitHelper(membership.getUser(), MEMBERSHIP_RENEWED);
+
+        return paymentResponse;
+    }
+
+
+    public PaymentResponse renewMembershipTransferRequest(PaymentTransferGetRequest paymentTransferGetRequest) {
+        Membership membership = getMembershipByUserId(paymentTransferGetRequest.getUserId());
 
         PaymentTransferSendRequest paymentTransferSendRequest = paymentConverter.convert(membership.getUser(), paymentTransferGetRequest);
 
         PaymentResponse paymentResponse = paymentServiceClient.create(paymentTransferSendRequest);
 
-        if(MembershipUtil.checkPaymentResponse(paymentResponse))
-            return paymentResponse.getMessage();
+        MembershipUtil.checkPaymentResponse(paymentResponse);
 
-        extractMembershipExpireDate(membership);
+        MembershipUtil.extractMembershipExpireDate(membership);
+
         membershipRepository.save(membership);
 
-        MailRequest mailRequest = mailConverter.convert(membership.getUser(), MEMBERSHIP_RENEWED);
+        rabbitHelper(membership.getUser(), MEMBERSHIP_RENEWED);
+
+        return paymentResponse;
+    }
+
+    private void rabbitHelper(User user, String message) {
+        MailRequest mailRequest = mailConverter.convert(user, message);
         rabbitTemplate.convertAndSend(rabbitMQMailConfiguration.getQueueName(), mailRequest);
-
-        return MEMBERSHIP_RENEWED;
     }
-
-
-    protected Membership getMembershipById(Long membershipId){
-        return membershipRepository.findById(membershipId).orElseThrow(() -> new RuntimeException("memebership cannot found!"));
-    }
-
-    protected Membership getMembershipByUserId(Long userId){
-        return membershipRepository.findByUserId(userId).orElseThrow(() -> new RuntimeException("memebership cannot found with userId: " + userId));
-    }
-
-    private static void extractMembershipExpireDate(Membership membership){
-        LocalDate expireDate = membership.getExpireDate().plusMonths(1);
-        membership.setExpireDate(expireDate);
-    }
-
 
     public String deleteMembershipById(Long membershipId) {
         Membership membership = getMembershipById(membershipId);
-        System.out.println("membership: " + membership);
-        membershipRepository.deleteById(membershipId);
-        System.out.println("membership: " + membership);
-        System.out.println("membershipId: " + membershipId);
-
+        membershipRepository.delete(membership);
         return membership.getId().toString();
     }
 
@@ -169,4 +155,17 @@ public class MembershipService {
     public MembershipResponse getUserMembership(Long userId) {
         return membershipConverter.convert(getMembershipByUserId(userId));
     }
+
+    protected Membership getMembershipById(Long membershipId) {
+        return membershipRepository.findById(membershipId).orElseThrow(() ->
+                new MembershipNotFoundException(Messages.Membership.NOT_EXISTS_BY_ID + membershipId));
+    }
+
+    protected Membership getMembershipByUserId(Long userId) {
+        userService.findUserById(userId);
+        return membershipRepository.findByUserId(userId).orElseThrow(() ->
+                new MembershipNotFoundByUserIdException(Messages.Membership.NOT_EXIST_BY_USER_ID + userId));
+    }
+
+
 }

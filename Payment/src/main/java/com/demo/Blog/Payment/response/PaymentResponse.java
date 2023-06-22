@@ -6,7 +6,7 @@ import com.demo.Blog.Payment.model.enums.PaymentType;
 
 public class PaymentResponse {
 
-    private Integer id;
+    private Long id;
     private String message;
     private Long userId;
     private PaymentType paymentType;
@@ -16,7 +16,7 @@ public class PaymentResponse {
     public PaymentResponse() {
     }
 
-    public PaymentResponse(Integer id, String message, Long userId, PaymentType paymentType, PaymentStatus status) {
+    public PaymentResponse(Long id, String message, Long userId, PaymentType paymentType, PaymentStatus status) {
         this.id = id;
         this.message = message;
         this.userId = userId;
@@ -24,10 +24,10 @@ public class PaymentResponse {
         this.status = status;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

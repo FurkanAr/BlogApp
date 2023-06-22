@@ -10,21 +10,23 @@ public class PostResponse {
     private String title;
     private String text;
     private LocalDate publicationDate;
+    private LocalDate updateDate;
+
     private String picture;
     private Long userId;
     private List<CommentResponse> commentResponseList;
     private List<LikeResponse> likeResponseList;
-
     private List<TagResponse> tagResponseList;
 
     public PostResponse() {
     }
 
-    public PostResponse(Long id, String title, String text, LocalDate publicationDate, String picture, Long userId, List<CommentResponse> commentResponseList, List<LikeResponse> likeResponseList, List<TagResponse> tagResponseList) {
+    public PostResponse(Long id, String title, String text, LocalDate publicationDate, LocalDate updateDate, String picture, Long userId, List<CommentResponse> commentResponseList, List<LikeResponse> likeResponseList, List<TagResponse> tagResponseList) {
         this.id = id;
         this.title = title;
         this.text = text;
         this.publicationDate = publicationDate;
+        this.updateDate = updateDate;
         this.picture = picture;
         this.userId = userId;
         this.commentResponseList = commentResponseList;
@@ -62,6 +64,14 @@ public class PostResponse {
 
     public void setPublicationDate(LocalDate publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public LocalDate getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDate updateDate) {
+        this.updateDate = updateDate;
     }
 
     public String getPicture() {

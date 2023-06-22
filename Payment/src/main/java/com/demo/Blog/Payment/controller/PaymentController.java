@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -36,6 +37,15 @@ public class PaymentController {
         return new ResponseEntity<>(paymentService.getAllPayments(), HttpStatus.OK);
     }
 
+    @GetMapping({"/{paymentId}"})
+    public ResponseEntity<PaymentResponse> getOnePayment(@PathVariable Long paymentId){
+        return new ResponseEntity<>(paymentService.getOnePayment(paymentId), HttpStatus.OK);
+    }
+
+    @GetMapping({"/total"})
+    public ResponseEntity<BigDecimal> getTotalPrice(){
+        return new ResponseEntity<>(paymentService.getTotalPrice(), HttpStatus.OK);
+    }
 
 
 }

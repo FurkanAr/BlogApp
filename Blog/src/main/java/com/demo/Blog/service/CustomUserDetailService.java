@@ -1,5 +1,6 @@
 package com.demo.Blog.service;
 
+import com.demo.Blog.exception.messages.Messages;
 import com.demo.Blog.repository.UserRepository;
 import com.demo.Blog.security.CustomUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,6 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUserName(username)
                 .map(CustomUserDetails :: new)
-                .orElseThrow(() -> new UsernameNotFoundException("No user found"));
+                .orElseThrow(() -> new UsernameNotFoundException(Messages.User.NOT_EXISTS + username));
     }
 }

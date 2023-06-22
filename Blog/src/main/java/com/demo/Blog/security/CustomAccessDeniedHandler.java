@@ -25,10 +25,10 @@ public class CustomAccessDeniedHandler  implements AccessDeniedHandler {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 accessDeniedException.getMessage(),
                 HttpStatus.FORBIDDEN.value(),
-                LocalDateTime.now().toString(),
                 request.getServletPath());
 
         PrintWriter writer = response.getWriter();
+
         writer.println(new ObjectMapper().writeValueAsString(exceptionResponse));
 
 

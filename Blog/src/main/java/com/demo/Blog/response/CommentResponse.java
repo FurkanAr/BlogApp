@@ -9,16 +9,18 @@ public class CommentResponse {
     private Long userId;
     private String text;
     private LocalDateTime createDate;
+    private LocalDateTime updateDate;
 
     public CommentResponse() {
     }
 
-    public CommentResponse(Long id, Long postId, Long userId, String text, LocalDateTime createDate) {
+    public CommentResponse(Long id, Long postId, Long userId, String text, LocalDateTime createDate, LocalDateTime updateDate) {
         this.id = id;
         this.postId = postId;
         this.userId = userId;
         this.text = text;
         this.createDate = createDate;
+        this.updateDate = updateDate;
     }
 
     public Long getId() {
@@ -59,5 +61,13 @@ public class CommentResponse {
 
     public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
+    }
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
     }
 }

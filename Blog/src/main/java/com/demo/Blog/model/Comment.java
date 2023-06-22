@@ -29,15 +29,17 @@ public class Comment {
     private String text;
     @Column(name = "create_date")
     private LocalDateTime createDate;
+    @Column(name = "update_date")
+    private LocalDateTime updateDate;
 
     public Comment() {
     }
 
-    public Comment(Post post, User user, String text, LocalDateTime createDate) {
+    public Comment(Post post, User user, String text) {
         this.post = post;
         this.user = user;
         this.text = text;
-        this.createDate = createDate;
+        this.createDate = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -78,6 +80,14 @@ public class Comment {
 
     public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
+    }
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
     }
 
     @Override

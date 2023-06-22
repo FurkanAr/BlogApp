@@ -1,22 +1,23 @@
 package com.demo.Blog.exception.response;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ExceptionValidatorResponse {
 
     private String message;
     private int httpStatus;
-    private String timestamp;
+    private LocalDateTime timestamp;
     private String path;
     private List<String> details;
 
     public ExceptionValidatorResponse() {
     }
 
-    public ExceptionValidatorResponse(String message, int httpStatus, String timestamp, String path, List<String> details) {
+    public ExceptionValidatorResponse(String message, int httpStatus, String path, List<String> details) {
+        this.timestamp = LocalDateTime.now();
         this.message = message;
         this.httpStatus = httpStatus;
-        this.timestamp = timestamp;
         this.path = path;
         this.details = details;
     }
@@ -37,11 +38,11 @@ public class ExceptionValidatorResponse {
         this.httpStatus = httpStatus;
     }
 
-    public String getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 

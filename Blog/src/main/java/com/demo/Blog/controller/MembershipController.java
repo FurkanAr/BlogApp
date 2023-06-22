@@ -3,12 +3,14 @@ package com.demo.Blog.controller;
 import com.demo.Blog.client.request.PaymentCardGetRequest;
 import com.demo.Blog.client.request.PaymentTransferGetRequest;
 import com.demo.Blog.client.request.RenewMembershipCardRequest;
+import com.demo.Blog.client.response.PaymentResponse;
 import com.demo.Blog.response.MembershipResponse;
 import com.demo.Blog.service.MembershipService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -22,27 +24,27 @@ public class MembershipController {
     }
 
     @PostMapping("/start/card")
-    public ResponseEntity<String> startMembershipPayByCard(@RequestBody PaymentCardGetRequest paymentCardGetRequest) {
-        String message = membershipService.createMembershipPayByCard(paymentCardGetRequest);
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
+    public ResponseEntity<PaymentResponse> startMembershipPayByCard(@RequestBody PaymentCardGetRequest paymentCardGetRequest) {
+        PaymentResponse paymentResponse = membershipService.createMembershipPayByCard(paymentCardGetRequest);
+        return new ResponseEntity<>(paymentResponse, HttpStatus.CREATED);
     }
 
     @PostMapping("/start/transfer")
-    public ResponseEntity<String> startMembershipPayByTransfer(@RequestBody PaymentTransferGetRequest paymentTransferGetRequest) {
-        String message = membershipService.createMembershipPayByTransfer(paymentTransferGetRequest);
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
+    public ResponseEntity<PaymentResponse> startMembershipPayByTransfer(@RequestBody PaymentTransferGetRequest paymentTransferGetRequest) {
+        PaymentResponse paymentResponse = membershipService.createMembershipPayByTransfer(paymentTransferGetRequest);
+        return new ResponseEntity<>(paymentResponse, HttpStatus.CREATED);
     }
 
     @PostMapping("/renew/card")
-    public ResponseEntity<String> renew(@RequestBody RenewMembershipCardRequest renewMembershipRequest) {
-        String message = membershipService.renewMembershipCardRequest(renewMembershipRequest);
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
+    public ResponseEntity<PaymentResponse> renew(@RequestBody RenewMembershipCardRequest renewMembershipRequest) {
+        PaymentResponse paymentResponse = membershipService.renewMembershipCardRequest(renewMembershipRequest);
+        return new ResponseEntity<>(paymentResponse, HttpStatus.CREATED);
     }
 
     @PostMapping("/renew/transfer")
-    public ResponseEntity<String> renew(@RequestBody PaymentTransferGetRequest paymentTransferGetRequest) {
-        String message = membershipService.renewMembershipTransferRequest(paymentTransferGetRequest);
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
+    public ResponseEntity<PaymentResponse> renew(@RequestBody PaymentTransferGetRequest paymentTransferGetRequest) {
+        PaymentResponse paymentResponse = membershipService.renewMembershipTransferRequest(paymentTransferGetRequest);
+        return new ResponseEntity<>(paymentResponse, HttpStatus.CREATED);
     }
 
     @GetMapping

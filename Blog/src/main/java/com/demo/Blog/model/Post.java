@@ -22,6 +22,9 @@ public class Post {
     private String text;
     @Column(name = "publication_date")
     private LocalDate publicationDate;
+
+    @Column(name = "update_date")
+    private LocalDate updateDate;
     @Column(name = "picture")
     private String picture;
 
@@ -52,12 +55,12 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String text, LocalDate publicationDate, String picture, User user) {
+    public Post(String title, String text, String picture, User user) {
         this.title = title;
         this.text = text;
-        this.publicationDate = publicationDate;
         this.picture = picture;
         this.user = user;
+        this.publicationDate=LocalDate.now();
     }
 
     public Long getId() {
@@ -90,6 +93,14 @@ public class Post {
 
     public void setPublicationDate(LocalDate publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public LocalDate getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDate updateDate) {
+        this.updateDate = updateDate;
     }
 
     public String getPicture() {
@@ -136,6 +147,7 @@ public class Post {
         this.tags.add(tag);
         tag.getPosts().add(this);
     }
+
     public void removeTag(long tagId) {
         Tag tag = this.tags.stream().filter(t -> t.getId() == tagId).findFirst().orElse(null);
         if (tag != null) {

@@ -18,6 +18,9 @@ public class CommentConverter {
         CommentResponse commentResponse = new CommentResponse();
         commentResponse.setId(comment.getId());
         commentResponse.setCreateDate(comment.getCreateDate());
+        if(comment.getUpdateDate() != null){
+            commentResponse.setUpdateDate(comment.getUpdateDate());
+        }
         commentResponse.setText(comment.getText());
         commentResponse.setPostId(comment.getPost().getId());
         commentResponse.setUserId(comment.getUser().getId());

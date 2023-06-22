@@ -77,7 +77,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/comments")
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/payments/**").hasAnyAuthority(UserRole.ADMIN.name(), UserRole.USER.name())
-                .antMatchers("/users/**").hasAuthority(UserRole.ADMIN.name())
+                .antMatchers(HttpMethod.GET, "/users/**").hasAuthority(UserRole.ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
