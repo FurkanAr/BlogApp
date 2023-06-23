@@ -1,8 +1,13 @@
 package com.demo.Blog.request;
 
-public class UserUserNameUpdateRequest {
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
+public class UserUserNameUpdateRequest {
+    @NotEmpty(message = "Please enter your username")
     private String oldUserName;
+    @NotEmpty(message = "Please enter your new username")
+    @Size(max = 15, min = 5, message = "Username: Invalid username, Username size should be between 5 to 15")
     private String newUserName;
 
     public UserUserNameUpdateRequest() {

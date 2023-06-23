@@ -1,10 +1,16 @@
 package com.demo.Blog.client.request;
 
+import javax.validation.constraints.NotEmpty;
+
 public class PaymentTransferGetRequest {
 
+    @NotEmpty(message = "Please enter your account number")
     private String accountNumberFrom;
+    @NotEmpty(message = "Please enter customer account number")
     private String accountNumberTo;
+    @NotEmpty(message = "Please enter firm name")
     private String firmName;
+    @NotEmpty(message = "Please enter your userId")
     private Long userId;
 
 

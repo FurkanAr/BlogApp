@@ -3,8 +3,8 @@ package com.demo.Blog.model;
 
 
 import com.demo.Blog.model.enums.UserRole;
-
 import javax.persistence.*;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

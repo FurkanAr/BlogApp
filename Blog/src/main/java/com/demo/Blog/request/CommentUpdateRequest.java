@@ -1,7 +1,10 @@
 package com.demo.Blog.request;
 
+import javax.validation.constraints.NotEmpty;
+
 public class CommentUpdateRequest {
 
+    @NotEmpty(message = "Please enter your comment")
     private String text;
 
     public CommentUpdateRequest() {

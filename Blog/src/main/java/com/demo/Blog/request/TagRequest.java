@@ -1,7 +1,9 @@
 package com.demo.Blog.request;
 
-public class TagRequest {
+import javax.validation.constraints.NotEmpty;
 
+public class TagRequest {
+    @NotEmpty(message = "Please enter tag name")
     private String name;
 
     public TagRequest() {

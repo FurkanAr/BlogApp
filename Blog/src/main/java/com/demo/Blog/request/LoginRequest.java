@@ -1,8 +1,12 @@
 package com.demo.Blog.request;
 
+import javax.validation.constraints.NotEmpty;
+
 public class LoginRequest {
 
+    @NotEmpty(message = "Please enter your username")
     private String userName;
+    @NotEmpty(message = "Please enter your password")
     private String password;
 
     public LoginRequest() {

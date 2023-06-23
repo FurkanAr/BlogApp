@@ -1,12 +1,16 @@
 package com.demo.Blog.client.request;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 public class PaymentCardGetRequest {
-
+    @NotEmpty(message = "Please enter your cardNo")
     private String cardNo;
+    @NotEmpty(message = "Please enter your card expire date")
     private LocalDate expireDate;
+    @NotEmpty(message = "Please enter your card cvcNo")
     private String cvcNo;
+    @NotEmpty(message = "Please enter your userId")
     private Long userId;
 
     public PaymentCardGetRequest() {

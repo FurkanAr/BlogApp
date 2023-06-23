@@ -33,9 +33,9 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ExceptionValidatorResponse> handle(MethodArgumentNotValidException exception, HttpServletRequest request) {
-        List<String> errors = exception.getBindingResult().getFieldErrors()
-                .stream().map(FieldError::getDefaultMessage).collect(Collectors.toList());
+    public ResponseEntity<ExceptionValidatorResponse> handle(MethodArgumentNotValidException exception, HttpServletRequest request){
+        List<String> errors = exception.getBindingResult().getFieldErrors().stream()
+                        .map(FieldError :: getDefaultMessage).collect(Collectors.toList());
         return ResponseEntity
                 .ok(new ExceptionValidatorResponse(
                         "Validation Failed",

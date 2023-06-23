@@ -25,6 +25,7 @@ public class ExceptionResponse {
         this.path = path;
     }
 
+
     public String getMessage() {
         return message;
     }

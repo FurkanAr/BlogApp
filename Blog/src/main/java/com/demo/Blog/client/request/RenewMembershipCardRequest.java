@@ -1,8 +1,11 @@
 package com.demo.Blog.client.request;
 
-public class RenewMembershipCardRequest {
+import javax.validation.constraints.NotEmpty;
 
+public class RenewMembershipCardRequest {
+    @NotEmpty(message = "Please enter your card id")
     private Long cardId;
+    @NotEmpty(message = "Please enter your userId")
     private Long userId;
 
     public RenewMembershipCardRequest() {
