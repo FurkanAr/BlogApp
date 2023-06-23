@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-
     @ExceptionHandler(PaymentNotFoundException.class)
     public ResponseEntity<ExceptionResponse> handle(PaymentNotFoundException exception, HttpServletRequest request) {
         return ResponseEntity

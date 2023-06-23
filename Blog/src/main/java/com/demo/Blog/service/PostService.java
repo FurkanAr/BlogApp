@@ -59,7 +59,7 @@ public class PostService {
     public List<PostResponse> getAllPosts(Optional<Long> userId) {
         if (userId.isPresent())
             return postConverter.convert(postRepository.findByUserId(userId.get()));
-        return postConverter.convert(postRepository.findAll());
+        return postConverter.convert(postRepository.findByOrderByPublicationDateDesc());
     }
 
     public List<PostResponse> getAllThisMonthPosts() {

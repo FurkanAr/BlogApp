@@ -13,7 +13,7 @@ spring:
         - id: blog-service
           uri: http://localhost:8080
           predicates:
-            - Path=/auth/**,/dashboard/**,/users/**,/posts/**,/comments/**,/likes/**,/tags,/memberships/**
+            - Path=/auth/**,/users/**,/posts/**,/comments/**,/likes/**,/tags,/memberships/**,/dashboard/**
           filters:
             - AuthenticationFilter
         - id: payment-service

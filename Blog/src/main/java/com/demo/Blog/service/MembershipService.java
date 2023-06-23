@@ -168,4 +168,7 @@ public class MembershipService {
     }
 
 
+    protected Long getTotalNumberOfMemberships() {
+        return membershipRepository.count();
+    }
 }

@@ -47,5 +47,10 @@ public class PaymentController {
         return new ResponseEntity<>(paymentService.getTotalPrice(), HttpStatus.OK);
     }
 
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<BigDecimal> getOneUserPayments(@PathVariable Long userId){
+        return new ResponseEntity<>(paymentService.getOneUserPayment(userId), HttpStatus.OK);
+    }
+
 
 }

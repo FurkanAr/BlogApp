@@ -21,7 +21,6 @@ public class NotificationListener {
 
     @RabbitListener(queues = "blog.confirmation.notification")
     public void notifcationListener(MailRequest mailRequest){
-        System.out.println("mailRequest: " + mailRequest.getMessage() + " " + mailRequest.getUserName());
         Mail mail = mailConverter.convert(mailRequest);
         mailRepository.save(mail);
 

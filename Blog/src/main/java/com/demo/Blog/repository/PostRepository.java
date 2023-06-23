@@ -29,4 +29,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
 
     List<Post> findPostsByTagsId(Long tagId);
+
+    List<Post> findByOrderByPublicationDateDesc();
+
+    List<Post> findByOrderByPublicationDateAsc();
 }

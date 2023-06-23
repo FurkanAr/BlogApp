@@ -20,18 +20,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<UserResponse>> getAllUsers() {
-        List<UserResponse> userResponses = userService.findAll();
-        return ResponseEntity.ok(userResponses);
-    }
-
-    @GetMapping("/{userId}")
-    public ResponseEntity<UserResponse> getUser(@PathVariable Long userId) {
-        UserResponse userResponse = userService.findById(userId);
-        return ResponseEntity.ok(userResponse);
-    }
-
     @PutMapping("/update/password")
     public ResponseEntity<UserResponse> updateUserPassword(@RequestBody UserPasswordUpdateRequest updateRequest) {
         UserResponse userResponse = userService.updateUserPassword(updateRequest);

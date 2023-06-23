@@ -18,7 +18,6 @@ import java.util.List;
 @Service
 public class PaymentService {
 
-    private static final String MESSAGE = "Payment successful, Enjoy!!";
 
     private final PaymentRepository paymentRepository;
     private final PaymentConverter paymentConverter;
@@ -28,15 +27,11 @@ public class PaymentService {
         this.paymentConverter = paymentConverter;
     }
 
-    private static void changePaymentStatusAndMessage(Payment payment) {
-        payment.setMessage(MESSAGE);
-        payment.setStatus(PaymentStatus.ACCEPTED);
-    }
-
     public PaymentResponse createPayment(PaymentCarSendRequest paymentCarSendRequest) {
         Payment payment = paymentConverter.convert(paymentCarSendRequest);
-        if (PaymentUtil.cardPaymentControl(paymentCarSendRequest)) {
-            changePaymentStatusAndMessage(payment);
+        boolean isSuccess = PaymentUtil.cardPaymentControl(paymentCarSendRequest);
+        if (isSuccess) {
+            PaymentUtil.changePaymentStatusAndMessage(payment);
             return paymentConverter.convert(paymentRepository.save(payment));
         }
         return paymentConverter.convert(payment);
@@ -44,8 +39,9 @@ public class PaymentService {
 
     public PaymentResponse createPayment(PaymentTransferSendRequest paymentTransferSendRequest) {
         Payment payment = paymentConverter.convert(paymentTransferSendRequest);
-        if (PaymentUtil.transferPaymentControl(paymentTransferSendRequest)) {
-            changePaymentStatusAndMessage(payment);
+        boolean isSuccess = PaymentUtil.transferPaymentControl(paymentTransferSendRequest);
+        if (isSuccess) {
+            PaymentUtil.changePaymentStatusAndMessage(payment);
             return paymentConverter.convert(paymentRepository.save(payment));
         }
         return paymentConverter.convert(payment);
@@ -53,9 +49,7 @@ public class PaymentService {
 
     public List<PaymentResponse> getAllPayments() {
         List<Payment> payments = paymentRepository.findAll();
-        System.out.println(payments);
         List<PaymentResponse> paymentResponses = paymentConverter.convert(payments);
-        System.out.println(paymentResponses);
         return paymentResponses;
     }
 
@@ -67,5 +61,10 @@ public class PaymentService {
 
     public BigDecimal getTotalPrice() {
         return paymentRepository.sumTotal();
+    }
+
+
+    public BigDecimal getOneUserPayment(Long userId) {
+        return paymentRepository.sumByUserId(userId);
     }
 }

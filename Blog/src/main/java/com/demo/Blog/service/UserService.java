@@ -31,11 +31,11 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public List<UserResponse> findAll() {
+    protected List<UserResponse> findAll() {
         return userConverter.convert(userRepository.findAll());
     }
 
-    public UserResponse findById(Long userId) {
+    protected UserResponse findById(Long userId) {
         return userConverter.convert(findUserById(userId));
     }
 
@@ -88,8 +88,11 @@ public class UserService {
         return user.getId().toString();
     }
 
-    public User findUserById(Long userId) {
+    protected User findUserById(Long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(Messages.User.ID_NOT_EXISTS + userId));
     }
 
+    protected Long findNumberOfUsers() {
+        return userRepository.count();
+    }
 }

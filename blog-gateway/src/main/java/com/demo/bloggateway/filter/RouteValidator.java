@@ -18,10 +18,8 @@ public class RouteValidator {
             "/likes",
             "/tags",
             "/memberships",
-            "/payments",
-            "/dashboard",
-            "/dashboard/admin",
-            "/dashboard/user");
+            "/dashboard"
+    );
 
     public Predicate<ServerHttpRequest> isSecured =
             request -> openApiEndpoints
