@@ -4,6 +4,7 @@ import com.demo.Blog.exception.card.CardNotFoundByUserIdException;
 import com.demo.Blog.exception.card.CardNotFoundException;
 import com.demo.Blog.exception.comment.CommentNotFoundException;
 import com.demo.Blog.exception.like.LikeNotFoundException;
+import com.demo.Blog.exception.like.UserAlreadyLikedException;
 import com.demo.Blog.exception.membership.MembershipIsExpiredException;
 import com.demo.Blog.exception.membership.MembershipNotFoundByUserIdException;
 import com.demo.Blog.exception.membership.MembershipNotFoundException;
@@ -78,6 +79,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(LikeNotFoundException.class)
     public ResponseEntity<ExceptionResponse> handle(LikeNotFoundException exception, HttpServletRequest request) {
+        return ResponseEntity
+                .ok(new ExceptionResponse(exception.getMessage(),
+                        HttpStatus.BAD_REQUEST.value(),
+                        request.getServletPath()));
+    }
+
+    @ExceptionHandler(UserAlreadyLikedException.class)
+    public ResponseEntity<ExceptionResponse> handle(UserAlreadyLikedException exception, HttpServletRequest request) {
         return ResponseEntity
                 .ok(new ExceptionResponse(exception.getMessage(),
                         HttpStatus.BAD_REQUEST.value(),

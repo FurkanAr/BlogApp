@@ -44,7 +44,7 @@ public class TagService {
     }
 
     protected List<Tag> findAllById(List<Long> tagIds) {
-        tagIds.stream().forEach(id -> {
+        tagIds.forEach(id -> {
             if(!tagRepository.existsById(id)){
                 throw new TagNotFoundException(Messages.TAG.NOT_EXISTS_BY_ID + id);
             }

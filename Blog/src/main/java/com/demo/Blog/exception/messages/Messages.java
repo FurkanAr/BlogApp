@@ -36,6 +36,8 @@ public class Messages {
 
     public static class Like {
         public static final String NOT_EXISTS_BY_ID = "Like cannot found! id: ";
+        public static final String LIKE_EXIST = "You already like this post! postId: ";
+
     }
 
     public static class Payment {
