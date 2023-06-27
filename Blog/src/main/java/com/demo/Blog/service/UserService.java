@@ -9,7 +9,6 @@ import com.demo.Blog.request.UserEmailUpdateRequest;
 import com.demo.Blog.request.UserPasswordUpdateRequest;
 import com.demo.Blog.request.UserUserNameUpdateRequest;
 import com.demo.Blog.response.UserResponse;
-import com.demo.Blog.utils.UserUtil;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

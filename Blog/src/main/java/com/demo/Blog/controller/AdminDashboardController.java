@@ -36,7 +36,7 @@ public class AdminDashboardController {
     public ResponseEntity<UserResponse> getUser(@PathVariable Long userId) {
         logger.debug("getUser method started");
         UserResponse userResponse = dashboardService.getUserById(userId);
-        logger.info("getOneUser successfully worked, userId: {}", userId);
+        logger.info("getUser successfully worked, userId: {}", userId);
         return ResponseEntity.ok(userResponse);
     }
 
@@ -44,7 +44,7 @@ public class AdminDashboardController {
     public ResponseEntity<Long> getTotalNumberOfUser() {
         logger.debug("getTotalNumberOfUser method started");
         Long total = dashboardService.getTotalNumberOfUser();
-        logger.info("getOneUser successfully worked, total user: {}", total);
+        logger.info("getTotalNumberOfUser successfully worked, total user: {}", total);
         return ResponseEntity.ok(total);
     }
 

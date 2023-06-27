@@ -78,4 +78,12 @@ public class UserRequest {
     public void setRole(String role) {
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "UserRequest{" +
+                "userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

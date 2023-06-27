@@ -6,10 +6,13 @@ import com.demo.Blog.exception.membership.UserHasMembershipException;
 import com.demo.Blog.exception.messages.Messages;
 import com.demo.Blog.exception.payment.PaymentRefusedException;
 import com.demo.Blog.model.Membership;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 
 public class MembershipUtil {
+    static Logger logger = LoggerFactory.getLogger(MembershipUtil.class);
 
     private MembershipUtil(){}
 
@@ -20,7 +23,11 @@ public class MembershipUtil {
     }
 
     public static boolean isMembershipActive(Membership membership){
-        return membership.getExpireDate().isAfter(LocalDate.now());
+        logger.debug("isMembershipActive method started");
+        boolean isActive = membership.getExpireDate().isAfter(LocalDate.now());
+        logger.info("User: {}, membership active: {} ", membership.getUser().getId(), isActive);
+        logger.info("isMembershipActive method successfully worked");
+        return isActive;
     }
 
     public static void checkPaymentResponse(PaymentResponse paymentResponse){
