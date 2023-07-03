@@ -6,6 +6,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -24,30 +26,45 @@ public class JwtService {
     @Value("${security.token.expires.in}")
     private long EXPIRES_IN;
 
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     public String findUserName(String token) {
-        return exportToken(token, Claims::getSubject);
+        logger.debug("findUserName method started");
+        String userName = exportToken(token, Claims::getSubject);
+        logger.info("User found with token: {}", userName);
+        logger.info("findUserName method successfully worked");
+        return userName;
     }
 
     private <T> T exportToken(String token, Function<Claims, T>  claimFunction){
+        logger.debug("exportToken method started");
         final Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getKey())
                 .build().parseClaimsJws(token).getBody();
+        logger.info("Claims: {}", claims);
+        logger.info("exportToken method successfully worked");
         return claimFunction.apply(claims);
     }
 
     private Key getKey() {
+        logger.debug("getKey method started");
         byte[] key = Decoders.BASE64.decode(SECRET_KEY);
+        logger.info("getKey method successfully worked");
         return Keys.hmacShaKeyFor(key);
     }
 
     public boolean tokenControl(String jwt, UserDetails userDetails) {
+        logger.debug("tokenControl method started");
         final String userName = findUserName(jwt);
-        return (userName.equals(userDetails.getUsername()) && !exportToken(jwt, Claims::getExpiration).before(new Date()));
+        boolean isSame = (userName.equals(userDetails.getUsername()) && !exportToken(jwt, Claims::getExpiration).before(new Date()));
+        logger.info("Username is same: {}", isSame);
+        logger.info("tokenControl method successfully worked");
+        return isSame;
     }
 
     public String generateToken(User user) {
-        return Jwts.builder()
+        logger.debug("generateToken method started");
+        String token = Jwts.builder()
                 .setClaims(new HashMap<>())
                 .setSubject(user.getUserName())
                 .setIssuer("Blog.app")
@@ -58,5 +75,7 @@ public class JwtService {
                 .setExpiration(new Date(System.currentTimeMillis() +EXPIRES_IN))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
+        logger.info("generateToken method successfully worked");
+        return token;
     }
 }

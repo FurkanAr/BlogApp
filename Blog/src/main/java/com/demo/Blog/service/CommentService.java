@@ -61,14 +61,12 @@ public class CommentService {
         logger.debug("getOneComment method started");
         logger.info("getOneComment method successfully worked");
         return commentConverter.convert(getCommentById(commentId));
-
     }
 
     @Transactional
     public CommentResponse createComment(CommentRequest newComment) {
         logger.debug("createComment method started");
         Membership membership = membershipService.getMembershipByUserId(newComment.getUserId());
-        logger.info("User membership found, user: {} ", newComment.getUserId());
 
         if (!MembershipUtil.isMembershipActive(membership)) {
             logger.warn("User membership is expired, user: {} ", membership.getUser().getId());
@@ -78,7 +76,6 @@ public class CommentService {
         }
 
         Post post = postService.getPostById(newComment.getPostId());
-        logger.info("Post found, postId: {} ", post.getId());
 
         Comment comment = commentRepository.save(commentConverter.convert(newComment, post, membership.getUser()));
         logger.info("Comment created: {} ", comment.getId());
