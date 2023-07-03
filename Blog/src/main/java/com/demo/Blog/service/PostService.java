@@ -30,6 +30,7 @@ public class PostService {
     private final MembershipService membershipService;
     private final TagService tagService;
 
+
     public PostService(PostRepository postRepository, PostConverter postConverter, UserService userService, MembershipService membershipService, TagService tagService) {
         this.postRepository = postRepository;
         this.postConverter = postConverter;
@@ -52,6 +53,7 @@ public class PostService {
         checkUserCanCreateOrNotPost(membership.getUser().getId());
 
         Post post = postRepository.save(postConverter.convert(newPost, membership.getUser(), tags));
+
 
         return postConverter.convert(post);
     }
