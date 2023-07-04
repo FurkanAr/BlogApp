@@ -28,7 +28,7 @@ public class CommentController {
     @GetMapping
     public ResponseEntity<List<CommentResponse>> getAllComments(@RequestParam Optional<Long> userId,
                                                                 @RequestParam Optional<Long> postId) {
-        logger.debug("getAllComments method started");
+        logger.info("getAllComments method started");
         List<CommentResponse> commentResponses = commentService.getAllCommentsWithParam(userId, postId);
         logger.info("getAllComments successfully worked");
         return ResponseEntity.ok(commentResponses);
@@ -36,7 +36,7 @@ public class CommentController {
 
     @PostMapping
     public ResponseEntity<CommentResponse> createComment(@RequestBody @Valid CommentRequest newComment) {
-        logger.debug("createComment method started");
+        logger.info("createComment method started");
         CommentResponse commentResponse = commentService.createComment(newComment);
         logger.info("createComment successfully worked, postId: {} userId: {}",
                 newComment.getPostId(), newComment.getUserId());
@@ -45,7 +45,7 @@ public class CommentController {
 
     @GetMapping("/{commentId}")
     public ResponseEntity<CommentResponse> getOneComment(@PathVariable Long commentId) {
-        logger.debug("getOneComment method started");
+        logger.info("getOneComment method started");
         CommentResponse commentResponse = commentService.getOneComment(commentId);
         logger.info("getOneComment successfully worked, commentId: {}", commentId);
         return ResponseEntity.ok(commentResponse);
@@ -54,7 +54,7 @@ public class CommentController {
     @PutMapping("/{commentId}")
     public ResponseEntity<CommentResponse> updateComment(@PathVariable Long commentId,
                                                          @RequestBody @Valid CommentUpdateRequest commentUpdateRequest) {
-        logger.debug("updateComment method started");
+        logger.info("updateComment method started");
         CommentResponse commentResponse = commentService.updateComment(commentId, commentUpdateRequest);
         logger.info("updateComment successfully worked, commentId: {}", commentId);
         return ResponseEntity.ok(commentResponse);
@@ -62,7 +62,7 @@ public class CommentController {
 
     @DeleteMapping("/{commentId}")
     public ResponseEntity<String> deleteComment(@PathVariable Long commentId) {
-        logger.debug("deleteComment method started");
+        logger.info("deleteComment method started");
         String message = commentService.deleteCommentById(commentId);
         logger.info("deleteComment successfully worked, commentId: {}", commentId);
         return ResponseEntity.ok(message);

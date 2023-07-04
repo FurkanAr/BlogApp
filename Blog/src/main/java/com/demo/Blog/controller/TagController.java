@@ -25,7 +25,7 @@ public class TagController {
 
     @GetMapping
     public ResponseEntity<List<TagResponse>> getAllTags() {
-        logger.debug("getAllTags method started");
+        logger.info("getAllTags method started");
         List<TagResponse> tagResponses = tagService.getAllTags();
         logger.info("getAllTags successfully worked");
         return ResponseEntity.ok(tagResponses);
@@ -33,7 +33,7 @@ public class TagController {
 
     @PostMapping
     public ResponseEntity<TagResponse> createTag(@RequestBody @Valid TagRequest tagRequest) {
-        logger.debug("createPost method started");
+        logger.info("createPost method started");
         TagResponse tagResponse = tagService.createTag(tagRequest);
         logger.info("createPost successfully worked, tagRequest: {}", tagRequest);
         return new ResponseEntity<>(tagResponse, HttpStatus.CREATED);

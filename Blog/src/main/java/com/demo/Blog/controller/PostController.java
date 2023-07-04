@@ -7,11 +7,9 @@ import com.demo.Blog.response.PostUpdateResponse;
 import com.demo.Blog.service.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,7 +28,7 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<List<PostResponse>> getAllPosts(@RequestParam Optional<Long> userId) {
-        logger.debug("getAllPosts method started");
+        logger.info("getAllPosts method started");
         List<PostResponse> postResponses = postService.getAllPosts(userId);
         logger.info("getAllPosts successfully worked");
         return ResponseEntity.ok(postResponses);
@@ -38,7 +36,7 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<PostResponse> createPost(@RequestBody @Valid PostRequest newPost) {
-        logger.debug("createPost method started");
+        logger.info("createPost method started");
         PostResponse postResponse = postService.createPost(newPost);
         logger.info("createPost successfully worked, userId: {}", newPost.getUserId());
         return new ResponseEntity<>(postResponse, HttpStatus.CREATED);
@@ -46,7 +44,7 @@ public class PostController {
 
     @GetMapping("/{postId}")
     public ResponseEntity<PostResponse> getOnePost(@PathVariable Long postId) {
-        logger.debug("getOnePost method started");
+        logger.info("getOnePost method started");
         PostResponse postResponse = postService.getOnePostById(postId);
         logger.info("getOnePost successfully worked, postId: {}", postId);
         return ResponseEntity.ok(postResponse);
@@ -54,7 +52,7 @@ public class PostController {
 
     @PutMapping("/{postId}")
     public ResponseEntity<PostUpdateResponse> updatePost(@PathVariable Long postId, @RequestBody @Valid PostUpdateRequest postUpdateRequest) {
-        logger.debug("updatePost method started");
+        logger.info("updatePost method started");
         PostUpdateResponse postResponse = postService.updatePost(postId, postUpdateRequest);
         logger.info("updatePost successfully worked, postId: {}", postId);
         return ResponseEntity.ok(postResponse);
@@ -62,7 +60,7 @@ public class PostController {
 
     @DeleteMapping("/{postId}")
     public ResponseEntity<String> deletePostById(@PathVariable Long postId) {
-        logger.debug("deletePostById method started");
+        logger.info("deletePostById method started");
         String message = postService.deletePostById(postId);
         logger.info("deletePostById successfully worked, postId: {}", postId);
         return ResponseEntity.ok(message);
@@ -70,7 +68,7 @@ public class PostController {
 
     @GetMapping("/month")
     public ResponseEntity<List<PostResponse>> getAllThisMonthPosts() {
-        logger.debug("getAllThisMonthPosts method started");
+        logger.info("getAllThisMonthPosts method started");
         List<PostResponse> postResponses = postService.getAllThisMonthPosts();
         logger.info("getAllThisMonthPosts successfully worked");
         return ResponseEntity.ok(postResponses);
@@ -78,7 +76,7 @@ public class PostController {
 
     @GetMapping("/category")
     public ResponseEntity<List<PostResponse>> getPostsByTag(@RequestParam("tag") String tag) {
-        logger.debug("getPostsByTag method started");
+        logger.info("getPostsByTag method started");
         List<PostResponse> postResponses = postService.getPostByTag(tag);
         logger.info("getPostsByTag successfully worked, tag: {}", tag);
         return ResponseEntity.ok(postResponses);

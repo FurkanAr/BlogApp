@@ -41,7 +41,7 @@ public class CommentService {
     }
 
     public List<CommentResponse> getAllCommentsWithParam(Optional<Long> userId, Optional<Long> postId) {
-        logger.debug("getAllCommentsWithParam method started");
+        logger.info("getAllCommentsWithParam method started");
 
         if (userId.isPresent() && postId.isPresent()) {
             logger.info("Found comments by userId: {}, postId: {} ", userId.get(), postId.get());
@@ -58,17 +58,17 @@ public class CommentService {
     }
 
     public CommentResponse getOneComment(Long commentId) {
-        logger.debug("getOneComment method started");
+        logger.info("getOneComment method started");
         logger.info("getOneComment method successfully worked");
         return commentConverter.convert(getCommentById(commentId));
     }
 
     @Transactional
     public CommentResponse createComment(CommentRequest newComment) {
-        logger.debug("createComment method started");
+        logger.info("createComment method started");
         Membership membership = membershipService.getMembershipByUserId(newComment.getUserId());
 
-        if (!MembershipUtil.isMembershipActive(membership)) {
+        if (MembershipUtil.isMembershipActive(membership)) {
             logger.warn("User membership is expired, user: {} ", membership.getUser().getId());
             membershipService.deleteMembershipById(membership.getId());
             logger.info("User: {} membership deleted, membershipId: {} ", membership.getUser().getId(), membership.getId());
@@ -86,7 +86,7 @@ public class CommentService {
 
     @Transactional
     public CommentResponse updateComment(Long commentId, CommentUpdateRequest commentUpdateRequest) {
-        logger.debug("updateComment method started");
+        logger.info("updateComment method started");
         Comment comment = getCommentById(commentId);
         comment.setText(commentUpdateRequest.getText());
         comment.setUpdateDate(LocalDateTime.now());
@@ -96,7 +96,7 @@ public class CommentService {
     }
 
     public String deleteCommentById(Long commentId) {
-        logger.debug("deleteCommentById method started");
+        logger.info("deleteCommentById method started");
         Comment comment = getCommentById(commentId);
         commentRepository.delete(comment);
         logger.info("Comment deleted: {} ", commentId);
@@ -105,7 +105,7 @@ public class CommentService {
     }
 
     public Comment getCommentById(Long commentId) {
-        logger.debug("getCommentById method started");
+        logger.info("getCommentById method started");
         Comment comment = commentRepository.findById(commentId).orElseThrow(() ->
                 new CommentNotFoundException(Messages.Comment.NOT_EXISTS_BY_ID + commentId));
         logger.info("Found comment by commentId: {} ", commentId);
@@ -115,7 +115,7 @@ public class CommentService {
     }
 
     public void deleteByUserId(Long userId) {
-        logger.debug("deleteByUserId method started");
+        logger.info("deleteByUserId method started");
         userService.findUserById(userId);
         List<Comment> comments = commentRepository.findByUserId(userId);
         commentRepository.deleteAll(comments);

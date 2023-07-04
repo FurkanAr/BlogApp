@@ -22,7 +22,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        logger.debug("loadUserByUsername method started");
+        logger.info("loadUserByUsername method started");
         UserDetails user = userRepository.findByUserName(username)
                 .map(CustomUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException(Messages.User.NOT_EXISTS + username));

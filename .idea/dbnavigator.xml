@@ -44,6 +44,7 @@
         <condition column="id" operator="=" value="" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="5c364cbc-5754-4a6d-9dfc-78e8fb8cf0f7" dataset="public.membership" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="5c364cbc-5754-4a6d-9dfc-78e8fb8cf0f7" dataset="information_schema.sql_features" active-filter-id="" />
     <filter-actions connection-id="5c364cbc-5754-4a6d-9dfc-78e8fb8cf0f7" dataset="public.post" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="5c364cbc-5754-4a6d-9dfc-78e8fb8cf0f7" dataset="public.card_info" active-filter-id="EMPTY_FILTER" />

@@ -29,7 +29,7 @@ public class JwtService {
     Logger logger = LoggerFactory.getLogger(getClass());
 
     public String findUserName(String token) {
-        logger.debug("findUserName method started");
+        logger.info("findUserName method started");
         String userName = exportToken(token, Claims::getSubject);
         logger.info("User found with token: {}", userName);
         logger.info("findUserName method successfully worked");
@@ -37,7 +37,7 @@ public class JwtService {
     }
 
     private <T> T exportToken(String token, Function<Claims, T>  claimFunction){
-        logger.debug("exportToken method started");
+        logger.info("exportToken method started");
         final Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getKey())
                 .build().parseClaimsJws(token).getBody();
@@ -47,14 +47,14 @@ public class JwtService {
     }
 
     private Key getKey() {
-        logger.debug("getKey method started");
+        logger.info("getKey method started");
         byte[] key = Decoders.BASE64.decode(SECRET_KEY);
         logger.info("getKey method successfully worked");
         return Keys.hmacShaKeyFor(key);
     }
 
     public boolean tokenControl(String jwt, UserDetails userDetails) {
-        logger.debug("tokenControl method started");
+        logger.info("tokenControl method started");
         final String userName = findUserName(jwt);
         boolean isSame = (userName.equals(userDetails.getUsername()) && !exportToken(jwt, Claims::getExpiration).before(new Date()));
         logger.info("Username is same: {}", isSame);
@@ -63,7 +63,7 @@ public class JwtService {
     }
 
     public String generateToken(User user) {
-        logger.debug("generateToken method started");
+        logger.info("generateToken method started");
         String token = Jwts.builder()
                 .setClaims(new HashMap<>())
                 .setSubject(user.getUserName())

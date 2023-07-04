@@ -28,7 +28,7 @@ public class MembershipController {
 
     @PostMapping("/start/card")
     public ResponseEntity<PaymentResponse> startMembershipPayByCard(@RequestBody @Valid PaymentCardGetRequest paymentCardGetRequest) {
-        logger.debug("startMembershipPayByCard method started");
+        logger.info("startMembershipPayByCard method started");
         PaymentResponse paymentResponse = membershipService.createMembershipPayByCard(paymentCardGetRequest);
         logger.info("startMembershipPayByCard successfully worked, userId: {}", paymentCardGetRequest.getUserId());
         return new ResponseEntity<>(paymentResponse, HttpStatus.CREATED);
@@ -36,7 +36,7 @@ public class MembershipController {
 
     @PostMapping("/start/transfer")
     public ResponseEntity<PaymentResponse> startMembershipPayByTransfer(@RequestBody @Valid PaymentTransferGetRequest paymentTransferGetRequest) {
-        logger.debug("startMembershipPayByTransfer method started");
+        logger.info("startMembershipPayByTransfer method started");
         PaymentResponse paymentResponse = membershipService.createMembershipPayByTransfer(paymentTransferGetRequest);
         logger.info("startMembershipPayByTransfer successfully worked, userId: {}", paymentTransferGetRequest.getUserId());
         return new ResponseEntity<>(paymentResponse, HttpStatus.CREATED);
@@ -44,7 +44,7 @@ public class MembershipController {
 
     @PostMapping("/renew/card")
     public ResponseEntity<PaymentResponse> renew(@RequestBody @Valid RenewMembershipCardRequest renewMembershipRequest) {
-        logger.debug("renew method started");
+        logger.info("renew method started");
         PaymentResponse paymentResponse = membershipService.renewMembershipCardRequest(renewMembershipRequest);
         logger.info("renew successfully worked, userId: {}", renewMembershipRequest.getUserId());
         return new ResponseEntity<>(paymentResponse, HttpStatus.CREATED);
@@ -52,7 +52,7 @@ public class MembershipController {
 
     @PostMapping("/renew/transfer")
     public ResponseEntity<PaymentResponse> renew(@RequestBody @Valid PaymentTransferGetRequest paymentTransferGetRequest) {
-        logger.debug("renew method started");
+        logger.info("renew method started");
         PaymentResponse paymentResponse = membershipService.renewMembershipTransferRequest(paymentTransferGetRequest);
         logger.info("renew successfully worked, userId: {}", paymentTransferGetRequest.getUserId());
         return new ResponseEntity<>(paymentResponse, HttpStatus.CREATED);
@@ -60,7 +60,7 @@ public class MembershipController {
 
     @GetMapping
     public ResponseEntity<List<MembershipResponse>> getAllMemberships() {
-        logger.debug("getAllMemberships method started");
+        logger.info("getAllMemberships method started");
         List<MembershipResponse> membershipResponses = membershipService.getAllMemberships();
         logger.info("getAllMemberships successfully worked");
         return ResponseEntity.ok(membershipResponses);
@@ -68,7 +68,7 @@ public class MembershipController {
 
     @GetMapping("/{membershipId}")
     public ResponseEntity<MembershipResponse> getOneMembership(@PathVariable Long membershipId) {
-        logger.debug("getOneMembership method started");
+        logger.info("getOneMembership method started");
         MembershipResponse membershipResponse = membershipService.getOneMembership(membershipId);
         logger.info("getOneMembership successfully worked, membershipId: {}", membershipId);
         return ResponseEntity.ok(membershipResponse);
@@ -76,7 +76,7 @@ public class MembershipController {
 
     @DeleteMapping("/{membershipId}")
     public ResponseEntity<String> deleteMembershipById(@PathVariable Long membershipId) {
-        logger.debug("deleteMembershipById method started");
+        logger.info("deleteMembershipById method started");
         String id = membershipService.deleteMembershipById(membershipId);
         logger.info("deleteMembershipById successfully worked, membershipId: {}", membershipId);
         return ResponseEntity.ok(id);
@@ -84,7 +84,7 @@ public class MembershipController {
 
     @GetMapping("/users")
     public ResponseEntity<MembershipResponse> getUserMembership(@RequestParam("userId") Long userId) {
-        logger.debug("getUserMembership method started");
+        logger.info("getUserMembership method started");
         MembershipResponse membershipResponse = membershipService.getUserMembership(userId);
         logger.info("getUserMembership successfully worked, userId: {}", userId);
         return ResponseEntity.ok(membershipResponse);

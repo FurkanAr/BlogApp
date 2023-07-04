@@ -2,6 +2,8 @@ package com.demo.Blog.config.auth;
 
 import com.demo.Blog.service.CustomUserDetailService;
 import com.demo.Blog.service.JwtService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +22,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final CustomUserDetailService customUserDetailService;
+
+    Logger logger = LoggerFactory.getLogger(getClass());
+
     public JwtAuthenticationFilter(JwtService jwtService, CustomUserDetailService customUserDetailService) {
         this.jwtService = jwtService;
         this.customUserDetailService = customUserDetailService;
@@ -28,26 +33,31 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        logger.info("doFilterInternal method started");
 
         final String header = request.getHeader("Authorization");
         final String jwt;
         final String userName;
 
-        if (header == null || !header.startsWith("Bearer ")){
+        if (header == null || !header.startsWith("Bearer ")) {
+            logger.warn("Header is missing");
             filterChain.doFilter(request, response);
             return;
         }
         jwt = header.substring(7);
+        logger.info("Authorization request in header");
         userName = jwtService.findUserName(jwt);
 
-        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null){
+        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = customUserDetailService.loadUserByUsername(userName);
-            if(jwtService.tokenControl(jwt, userDetails)){
+            if (jwtService.tokenControl(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-               usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-               SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                logger.info("User: {}, authenticated", userDetails.getUsername());
             }
         }
+        logger.info("doFilterInternal method successfully worked");
         filterChain.doFilter(request, response);
     }
 }

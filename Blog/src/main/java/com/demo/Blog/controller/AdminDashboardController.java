@@ -26,7 +26,7 @@ public class AdminDashboardController {
 
     @GetMapping("/users")
     public ResponseEntity<List<UserResponse>> getAllUsers() {
-        logger.debug("getAllUsers method started");
+        logger.info("getAllUsers method started");
         List<UserResponse> userResponses = dashboardService.getAllUsers();
         logger.info("getAllUsers method successfully worked");
         return ResponseEntity.ok(userResponses);
@@ -34,7 +34,7 @@ public class AdminDashboardController {
 
     @GetMapping("/users/{userId}")
     public ResponseEntity<UserResponse> getUser(@PathVariable Long userId) {
-        logger.debug("getUser method started");
+        logger.info("getUser method started");
         UserResponse userResponse = dashboardService.getUserById(userId);
         logger.info("getUser successfully worked, userId: {}", userId);
         return ResponseEntity.ok(userResponse);
@@ -42,7 +42,7 @@ public class AdminDashboardController {
 
     @GetMapping("/users/total")
     public ResponseEntity<Long> getTotalNumberOfUser() {
-        logger.debug("getTotalNumberOfUser method started");
+        logger.info("getTotalNumberOfUser method started");
         Long total = dashboardService.getTotalNumberOfUser();
         logger.info("getTotalNumberOfUser successfully worked, total user: {}", total);
         return ResponseEntity.ok(total);
@@ -50,7 +50,7 @@ public class AdminDashboardController {
 
     @GetMapping("/posts")
     public ResponseEntity<List<PostResponse>> getAllPosts(@RequestParam Optional<Long> userId) {
-        logger.debug("getAllPosts method started");
+        logger.info("getAllPosts method started");
         List<PostResponse> postResponse = dashboardService.getAllPosts(userId);
         logger.info("getAllPost successfully worked, number of post: {}", postResponse.size());
         return ResponseEntity.ok(postResponse);
@@ -58,7 +58,7 @@ public class AdminDashboardController {
 
     @GetMapping("/memberships")
     public ResponseEntity<List<MembershipResponse>> getAllMemberships() {
-        logger.debug("getAllMemberships method started");
+        logger.info("getAllMemberships method started");
         List<MembershipResponse> membershipResponses = dashboardService.getAllMemberships();
         logger.info("getAllMemberships successfully worked");
         return ResponseEntity.ok(membershipResponses);
@@ -66,7 +66,7 @@ public class AdminDashboardController {
 
     @GetMapping("/memberships/{membershipId}")
     public ResponseEntity<MembershipResponse> getOneMembership(@PathVariable Long membershipId) {
-        logger.debug("getOneMembership method started");
+        logger.info("getOneMembership method started");
         MembershipResponse membershipResponse = dashboardService.getOneMembership(membershipId);
         logger.info("getOneMembership successfully worked, membershipId: {}", membershipId);
         return ResponseEntity.ok(membershipResponse);
@@ -74,7 +74,7 @@ public class AdminDashboardController {
 
     @GetMapping("/memberships/total")
     public ResponseEntity<Long> getTotalNumberOfMemberships() {
-        logger.debug("getTotalNumberOfMemberships method started");
+        logger.info("getTotalNumberOfMemberships method started");
         Long total = dashboardService.getTotalNumberOfMemberships();
         logger.info("getTotalNumberOfMemberships successfully worked, number of memberships: {}", total);
         return ResponseEntity.ok(total);
@@ -82,7 +82,7 @@ public class AdminDashboardController {
 
     @GetMapping("/payments")
     public ResponseEntity<List<PaymentResponse>> getAllPayments() {
-        logger.debug("getAllPayments method started");
+        logger.info("getAllPayments method started");
         List<PaymentResponse> paymentResponses = dashboardService.getAllPayments();
         logger.info("getAllPayments successfully worked");
         return ResponseEntity.ok(paymentResponses);
@@ -90,7 +90,7 @@ public class AdminDashboardController {
 
     @GetMapping("/payments/{paymentId}")
     public ResponseEntity<PaymentResponse> getOnePayment(@PathVariable Long paymentId) {
-        logger.debug("getOnePayment method started");
+        logger.info("getOnePayment method started");
         PaymentResponse paymentResponse = dashboardService.getOnePayment(paymentId);
         logger.info("getOnePayment successfully worked, paymentId: {}", paymentId);
         return ResponseEntity.ok(paymentResponse);
@@ -98,7 +98,7 @@ public class AdminDashboardController {
 
     @GetMapping("/payments/total")
     public ResponseEntity<BigDecimal> getTotalPaymentPrice() {
-        logger.debug("getTotalPaymentPrice method started");
+        logger.info("getTotalPaymentPrice method started");
         BigDecimal total = dashboardService.getTotalPaymentPrice();
         logger.info("getTotalPaymentPrice successfully worked, total payments: {}", total);
         return ResponseEntity.ok(total);
@@ -106,7 +106,7 @@ public class AdminDashboardController {
 
     @GetMapping("/payments/users/{userId}")
     public ResponseEntity<BigDecimal> getOneUserPayments(@PathVariable Long userId) {
-        logger.debug("getOneUserPayments method started");
+        logger.info("getOneUserPayments method started");
         BigDecimal total = dashboardService.getOneUserPayments(userId);
         logger.info("getOneUserPayments successfully worked, userId: {}", userId);
         return ResponseEntity.ok(total);

@@ -41,7 +41,7 @@ public class LikeService {
     }
 
     public List<LikeResponse> getAllLikesWithParam(Optional<Long> userId, Optional<Long> postId) {
-        logger.debug("getAllLikesWithParam method started");
+        logger.info("getAllLikesWithParam method started");
 
         if (userId.isPresent() && postId.isPresent()) {
             logger.info("Found likes by userId: {}, postId: {} ", userId.get(), postId.get());
@@ -59,12 +59,12 @@ public class LikeService {
     }
     @Transactional
     public LikeResponse createLike(LikeRequest likeRequest) {
-        logger.debug("createLike method started");
+        logger.info("createLike method started");
         User user = userService.findUserById(likeRequest.getUserId());
         Post post = postService.getPostById(likeRequest.getPostId());
         Membership membership = membershipService.getMembershipByUserId(likeRequest.getUserId());
 
-        if (!MembershipUtil.isMembershipActive(membership)) {
+        if (MembershipUtil.isMembershipActive(membership)) {
             logger.warn("User membership is expired, user: {} ", membership.getUser().getId());
             membershipService.deleteMembershipById(membership.getId());
             logger.info("User: {} membership deleted, membershipId: {} ", membership.getUser().getId(), membership.getId());
@@ -86,13 +86,13 @@ public class LikeService {
     }
 
     public LikeResponse getOneLike(Long likeId) {
-        logger.debug("getOneLike method started");
+        logger.info("getOneLike method started");
         logger.info("getOneLike method successfully worked");
         return likeConverter.convert(getLikeById(likeId));
     }
 
     public String deleteLikeById(Long likeId) {
-        logger.debug("deleteLikeById method started");
+        logger.info("deleteLikeById method started");
         Like like = getLikeById(likeId);
         likeRepository.delete(like);
         logger.info("Like deleted: {} ", likeId);
@@ -101,7 +101,7 @@ public class LikeService {
     }
 
     public Like getLikeById(Long likeId) {
-        logger.debug("getLikeById method started");
+        logger.info("getLikeById method started");
 
         Like like = likeRepository.findById(likeId).orElseThrow(() ->
                 new LikeNotFoundException(Messages.Like.NOT_EXISTS_BY_ID + likeId));
@@ -112,7 +112,7 @@ public class LikeService {
     }
 
     public void deleteByUserId(Long userId) {
-        logger.debug("deleteByUserId method started");
+        logger.info("deleteByUserId method started");
         userService.findUserById(userId);
         List<Like> likes = likeRepository.findAllByUserId(userId);
         likeRepository.deleteAll(likes);

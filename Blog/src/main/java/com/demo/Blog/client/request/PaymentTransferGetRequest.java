@@ -1,6 +1,7 @@
 package com.demo.Blog.client.request;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class PaymentTransferGetRequest {
 
@@ -10,7 +11,7 @@ public class PaymentTransferGetRequest {
     private String accountNumberTo;
     @NotEmpty(message = "Please enter firm name")
     private String firmName;
-    @NotEmpty(message = "Please enter your userId")
+    @NotNull(message = "Please enter your userId")
     private Long userId;
 
 

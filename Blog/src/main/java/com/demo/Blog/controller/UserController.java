@@ -25,7 +25,7 @@ public class UserController {
 
     @PutMapping("/update/password")
     public ResponseEntity<UserResponse> updateUserPassword(@RequestBody @Valid UserPasswordUpdateRequest updateRequest) {
-        logger.debug("updateUserPassword method started");
+        logger.info("updateUserPassword method started");
         UserResponse userResponse = userService.updateUserPassword(updateRequest);
         logger.info("updateUserPassword successfully worked, username: {}", updateRequest.getUserName());
         return ResponseEntity.ok(userResponse);
@@ -33,7 +33,7 @@ public class UserController {
 
     @PutMapping("/update/username")
     public ResponseEntity<UserResponse> updateUserUserName(@RequestBody @Valid UserUserNameUpdateRequest updateRequest) {
-        logger.debug("updateUserUserName method started");
+        logger.info("updateUserUserName method started");
         UserResponse userResponse = userService.updateUserUserName(updateRequest);
         logger.info("updateUserUserName successfully worked, username: {}", updateRequest.getNewUserName());
         return ResponseEntity.ok(userResponse);
@@ -41,7 +41,7 @@ public class UserController {
 
     @PutMapping("/update/email")
     public ResponseEntity<UserResponse> updateUserEmail(@RequestBody @Valid UserEmailUpdateRequest updateRequest) {
-        logger.debug("updateUserEmail method started");
+        logger.info("updateUserEmail method started");
         UserResponse userResponse = userService.updateUserEmail(updateRequest);
         logger.info("updateUserEmail successfully worked, email: {}", updateRequest.getNewEmail());
         return ResponseEntity.ok(userResponse);
@@ -49,7 +49,7 @@ public class UserController {
 
     @DeleteMapping("/{userId}")
     public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
-        logger.debug("deleteUser method started");
+        logger.info("deleteUser method started");
         String message = userService.deleteUser(userId);
         logger.info("deleteUser successfully worked, userId: {}",userId);
         return ResponseEntity.ok(message);

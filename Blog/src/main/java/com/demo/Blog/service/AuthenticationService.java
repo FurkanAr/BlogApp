@@ -54,8 +54,9 @@ public class AuthenticationService {
     }
     @Transactional
     public AuthResponse save(UserRequest userRequest) {
-        logger.debug("save method started");
+        logger.info("save method started");
         logger.info("UserRequest: {}", userRequest);
+
         Optional<User> foundUser = userRepository.findByEmail(userRequest.getEmail());
         if (foundUser.isPresent()) {
             logger.warn("User already has account by given email: {}", userRequest.getEmail());
@@ -77,7 +78,7 @@ public class AuthenticationService {
     }
 
     public AuthResponse login(LoginRequest loginRequest) {
-        logger.debug("login method started");
+        logger.info("login method started");
         User foundUser = userRepository.findByUserName(loginRequest.getUserName()).orElseThrow(()
                 -> new UsernameNotFoundException(Messages.User.NOT_EXISTS + loginRequest.getUserName()));
         logger.info("Found user: {}", foundUser.getId());
