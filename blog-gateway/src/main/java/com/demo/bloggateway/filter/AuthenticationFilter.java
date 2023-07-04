@@ -1,6 +1,8 @@
 package com.demo.bloggateway.filter;
 
 import com.demo.bloggateway.util.JwtUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -15,6 +17,8 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     @Autowired
     private JwtUtil jwtUtil;
 
+    Logger logger = LoggerFactory.getLogger(getClass());
+
     public AuthenticationFilter() {
         super(Config.class);
     }
@@ -22,11 +26,13 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
     @Override
     public GatewayFilter apply(Config config) {
+        logger.info("apply method started");
         return ((exchange, chain) -> {
             if (routeValidator.isSecured.test(exchange.getRequest())) {
-                //header contains token or not
+
                 if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
-                    throw new RuntimeException("missing authorization header");
+                    logger.warn("Missing authorization header");
+                    throw new RuntimeException("Missing authorization header");
                 }
 
                 String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
@@ -37,10 +43,11 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                     jwtUtil.validateToken(authHeader);
 
                 } catch (Exception e) {
-                    System.out.println("invalid access...!");
-                    throw new RuntimeException("un authorized access to application");
+                    logger.warn("invalid access");
+                    throw new RuntimeException("Unauthorized access to application");
                 }
             }
+            logger.info("apply method successfully worked");
             return chain.filter(exchange);
         });
     }
