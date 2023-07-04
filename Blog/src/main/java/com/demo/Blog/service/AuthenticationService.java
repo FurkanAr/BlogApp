@@ -71,7 +71,7 @@ public class AuthenticationService {
         logger.info("MailRequest: {}, sent to : {}", mailRequest, rabbitMQMailConfiguration.getQueueName());
 
         var token = jwtService.generateToken(savedUser);
-        logger.info("Token created for user: {}, token: {}", savedUser.getId(), token);
+        logger.info("Token created for user: {}", savedUser.getId());
 
         logger.info("save method successfully worked");
         return authConverter.convert(savedUser, token, REGISTRATION_MESSAGE);

@@ -41,7 +41,6 @@ public class JwtService {
         final Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getKey())
                 .build().parseClaimsJws(token).getBody();
-        logger.info("Claims: {}", claims);
         logger.info("exportToken method successfully worked");
         return claimFunction.apply(claims);
     }
