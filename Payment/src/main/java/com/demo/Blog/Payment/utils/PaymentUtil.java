@@ -47,7 +47,7 @@ public class PaymentUtil {
         logger.info("changePaymentStatusAndMessage method started");
         payment.setMessage(MESSAGE);
         payment.setStatus(PaymentStatus.ACCEPTED);
-        logger.info("Payment: {}  updated" , payment.getId());
+        logger.info("Payment message: {}, status: {} updated", MESSAGE, PaymentStatus.ACCEPTED);
         logger.info("changePaymentStatusAndMessage method successfully worked");
     }
 }
