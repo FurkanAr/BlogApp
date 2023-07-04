@@ -33,3 +33,5 @@ spring:
     client:
       service-url:
         defaultZone: http://localhost:8761/eureka/
+logging:
+  file.name: /logs/blog-gateway.log
