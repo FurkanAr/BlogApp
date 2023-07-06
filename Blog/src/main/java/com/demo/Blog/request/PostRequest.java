@@ -1,7 +1,6 @@
 package com.demo.Blog.request;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -15,7 +14,6 @@ public class PostRequest {
     private String text;
     @NotEmpty(message = "Please enter your picture")
     private String picture;
-    @NotNull(message = "Please enter your userId")
     private Long userId;
     @NotEmpty(message = "Please enter your tag ids")
     private List<Long> tagIds;

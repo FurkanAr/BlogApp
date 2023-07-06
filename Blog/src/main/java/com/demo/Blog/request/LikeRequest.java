@@ -5,7 +5,6 @@ import javax.validation.constraints.NotEmpty;
 public class LikeRequest {
     @NotEmpty(message = "Please enter postId")
     private Long postId;
-    @NotEmpty(message = "Please enter your userId")
     private Long userId;
 
     public LikeRequest() {

@@ -11,7 +11,6 @@ public class PaymentCardGetRequest {
     private LocalDate expireDate;
     @NotEmpty(message = "Please enter your card cvcNo")
     private String cvcNo;
-    @NotNull(message = "Please enter your userId")
     private Long userId;
 
     public PaymentCardGetRequest() {
