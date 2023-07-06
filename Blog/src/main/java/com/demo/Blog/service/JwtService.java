@@ -20,12 +20,6 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    @Value("${security.jwt.secret}")
-    private String SECRET_KEY;
-
-    @Value("${security.token.expires.in}")
-    private long EXPIRES_IN;
-
     Logger logger = LoggerFactory.getLogger(getClass());
 
     public String findUserName(String token) {
@@ -47,6 +41,8 @@ public class JwtService {
 
     private Key getKey() {
         logger.info("getKey method started");
+        //@Value("${security.jwt.secret}")
+        String SECRET_KEY = "9ln6jZ1h5BuP28k5RmlOaeL5rise7xe9czd4yA8pZdfGA36zbmRt";
         byte[] key = Decoders.BASE64.decode(SECRET_KEY);
         logger.info("getKey method successfully worked");
         return Keys.hmacShaKeyFor(key);
@@ -63,6 +59,8 @@ public class JwtService {
 
     public String generateToken(User user) {
         logger.info("generateToken method started");
+        //@Value("${security.token.expires.in}")
+        long EXPIRES_IN = 1440000;
         String token = Jwts.builder()
                 .setClaims(new HashMap<>())
                 .setSubject(user.getUserName())
@@ -71,7 +69,7 @@ public class JwtService {
                 .claim("userId" , user.getId().toString())
                 .claim("email" , user.getEmail())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() +EXPIRES_IN))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRES_IN))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
         logger.info("generateToken method successfully worked");
