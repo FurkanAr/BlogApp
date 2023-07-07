@@ -43,7 +43,7 @@ public class MembershipController {
     }
 
     @PostMapping("/renew/card")
-    public ResponseEntity<PaymentResponse> renew(@RequestBody @Valid RenewMembershipCardRequest renewMembershipRequest) {
+    public ResponseEntity<PaymentResponse> renewMembershipCardRequest(@RequestBody @Valid RenewMembershipCardRequest renewMembershipRequest) {
         logger.info("renew method started");
         PaymentResponse paymentResponse = membershipService.renewMembershipCardRequest(renewMembershipRequest);
         logger.info("renew successfully worked, userId: {}", renewMembershipRequest.getUserId());
@@ -51,7 +51,7 @@ public class MembershipController {
     }
 
     @PostMapping("/renew/transfer")
-    public ResponseEntity<PaymentResponse> renew(@RequestBody @Valid PaymentTransferGetRequest paymentTransferGetRequest) {
+    public ResponseEntity<PaymentResponse> renewMembershipTransferRequest(@RequestBody @Valid PaymentTransferGetRequest paymentTransferGetRequest) {
         logger.info("renew method started");
         PaymentResponse paymentResponse = membershipService.renewMembershipTransferRequest(paymentTransferGetRequest);
         logger.info("renew successfully worked, userId: {}", paymentTransferGetRequest.getUserId());
