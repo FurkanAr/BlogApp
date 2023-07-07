@@ -21,6 +21,7 @@ import java.util.List;
 @Service
 public class UserService {
 
+    private static final String PASSWORD_UPDATED = "Your password is updated";
     private final UserRepository userRepository;
     private final UserConverter userConverter;
     private final PasswordEncoder passwordEncoder;
@@ -47,7 +48,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponse updateUserPassword(UserPasswordUpdateRequest updateRequest) {
+    public String updateUserPassword(UserPasswordUpdateRequest updateRequest) {
         logger.info("updateUserPassword method started");
 
         User foundUser = getUser(updateRequest.getUserName());
@@ -65,7 +66,7 @@ public class UserService {
         logger.info("User password updated: {} ", user.getId());
 
         logger.info("updateUserPassword method successfully worked");
-        return userConverter.convert(user);
+        return PASSWORD_UPDATED;
     }
 
     @Transactional
