@@ -3,7 +3,7 @@ package com.demo.Blog.request;
 import javax.validation.constraints.NotEmpty;
 
 public class LikeRequest {
-    @NotEmpty(message = "Please enter postId")
+
     private Long postId;
     private Long userId;
 

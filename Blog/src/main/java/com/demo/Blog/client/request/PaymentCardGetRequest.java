@@ -1,5 +1,10 @@
 package com.demo.Blog.client.request;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -7,6 +12,8 @@ import java.time.LocalDate;
 public class PaymentCardGetRequest {
     @NotEmpty(message = "Please enter your cardNo")
     private String cardNo;
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     @NotNull(message = "Please enter your card expire date")
     private LocalDate expireDate;
     @NotEmpty(message = "Please enter your card cvcNo")
