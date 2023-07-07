@@ -24,11 +24,11 @@ public class UserController {
     }
 
     @PutMapping("/update/password")
-    public ResponseEntity<UserResponse> updateUserPassword(@RequestBody @Valid UserPasswordUpdateRequest updateRequest) {
+    public ResponseEntity<String> updateUserPassword(@RequestBody @Valid UserPasswordUpdateRequest updateRequest) {
         logger.info("updateUserPassword method started");
-        UserResponse userResponse = userService.updateUserPassword(updateRequest);
+        String message = userService.updateUserPassword(updateRequest);
         logger.info("updateUserPassword successfully worked, username: {}", updateRequest.getUserName());
-        return ResponseEntity.ok(userResponse);
+        return ResponseEntity.ok(message);
     }
 
     @PutMapping("/update/username")
