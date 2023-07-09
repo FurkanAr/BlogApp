@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CardService {
 
+    private static final String CARD_SAVED = "Card successfully saved!!";
     private final CardInfoRepository cardInfoRepository;
     private final CardConverter cardConverter;
 
@@ -27,11 +28,12 @@ public class CardService {
     }
 
     @Transactional
-    protected void saveCard(PaymentCardGetRequest paymentCardGetRequest, User user) {
+    protected String saveCard(PaymentCardGetRequest paymentCardGetRequest, User user) {
         logger.info("saveCard method started");
         CardInfo card = cardInfoRepository.save(cardConverter.convert(paymentCardGetRequest, user));
         logger.info("Card created: {}", card.getId());
         logger.info("saveCard method successfully worked");
+        return CARD_SAVED;
     }
 
     protected CardInfo getCardById(Long id) {
