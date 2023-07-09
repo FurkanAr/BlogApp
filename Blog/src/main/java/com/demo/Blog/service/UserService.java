@@ -147,7 +147,7 @@ public class UserService {
         return total;
     }
 
-    private User getUser(String userName) {
+    User getUser(String userName) {
         logger.info("getUser method started");
 
         User foundUser = userRepository.findByUserName(userName).orElseThrow(() -> new UsernameNotFoundException(Messages.User.NOT_EXISTS + userName));
