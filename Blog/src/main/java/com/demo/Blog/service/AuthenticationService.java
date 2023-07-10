@@ -1,6 +1,7 @@
 package com.demo.Blog.service;
 
 import com.demo.Blog.config.rabbitMQ.RabbitMQMailConfiguration;
+import com.demo.Blog.constants.Constant;
 import com.demo.Blog.converter.AuthConverter;
 import com.demo.Blog.converter.MailConverter;
 import com.demo.Blog.converter.UserConverter;
@@ -15,9 +16,9 @@ import com.demo.Blog.response.AuthResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,12 +36,6 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final AuthConverter authConverter;
     Logger logger = LoggerFactory.getLogger(getClass());
-    @Value("${registration.mail.message}")
-    private String REGISTRATION_MAIL_MESSAGE;
-    @Value("${registration.message}")
-    private String REGISTRATION_MESSAGE;
-    @Value("${login.message}")
-    private String LOGIN_MESSAGE;
 
     public AuthenticationService(UserRepository userRepository, JwtService jwtService, UserConverter userConverter, RabbitTemplate rabbitTemplate, RabbitMQMailConfiguration rabbitMQMailConfiguration, MailConverter mailConverter, AuthenticationManager authenticationManager, AuthConverter authConverter) {
         this.userRepository = userRepository;
@@ -52,6 +47,7 @@ public class AuthenticationService {
         this.authenticationManager = authenticationManager;
         this.authConverter = authConverter;
     }
+
     @Transactional
     public AuthResponse save(UserRequest userRequest) {
         logger.info("save method started");
@@ -60,13 +56,13 @@ public class AuthenticationService {
         Optional<User> foundUser = userRepository.findByEmail(userRequest.getEmail());
         if (foundUser.isPresent()) {
             logger.warn("User already has account by given email: {}", userRequest.getEmail());
-            throw new UserEmailAlreadyInUseException(Messages.User.EXIST + userRequest.getEmail());
+            throw new UserEmailAlreadyInUseException(Messages.User.EMAIL_EXIST + userRequest.getEmail());
         }
 
         User savedUser = userRepository.save(userConverter.convert(userRequest));
         logger.info("User created: {}", savedUser.getId());
 
-        MailRequest mailRequest = mailConverter.convert(savedUser, REGISTRATION_MAIL_MESSAGE);
+        MailRequest mailRequest = mailConverter.convert(savedUser, Constant.Authentication.REGISTRATION_MAIL_MESSAGE);
         rabbitTemplate.convertAndSend(rabbitMQMailConfiguration.getQueueName(), mailRequest);
         logger.info("MailRequest: {}, sent to : {}", mailRequest, rabbitMQMailConfiguration.getQueueName());
 
@@ -74,24 +70,25 @@ public class AuthenticationService {
         logger.info("Token created for user: {}", savedUser.getId());
 
         logger.info("save method successfully worked");
-        return authConverter.convert(savedUser, token, REGISTRATION_MESSAGE);
+        return authConverter.convert(savedUser, token, Constant.Authentication.REGISTRATION_MESSAGE);
     }
 
     public AuthResponse login(LoginRequest loginRequest) {
         logger.info("login method started");
-        User foundUser = userRepository.findByUserName(loginRequest.getUserName()).orElseThrow(()
-                -> new UsernameNotFoundException(Messages.User.NOT_EXISTS + loginRequest.getUserName()));
-        logger.info("Found user: {}", foundUser.getId());
+        User user = userRepository.findByUserName(loginRequest.getUserName()).orElseThrow(() ->
+                new UsernameNotFoundException(Messages.User.NOT_EXISTS + loginRequest.getUserName()));
+
+        logger.info("Found user: {}", user.getId());
 
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassword());
 
         authenticationManager.authenticate(authToken);
-        logger.info("User authenticated user: {}", foundUser.getId());
+        logger.info("User authenticated user: {}", user.getId());
 
-        var token = jwtService.generateToken(foundUser);
-        logger.info("User {}, authenticated with token: {} ", foundUser.getId(), token);
+        var token = jwtService.generateToken(user);
+        logger.info("User {}, authenticated with token ", user.getId());
 
         logger.info("login method successfully worked");
-        return authConverter.convert(foundUser, token, LOGIN_MESSAGE);
+        return authConverter.convert(user, token, Constant.Authentication.LOGIN_MESSAGE);
     }
 }
