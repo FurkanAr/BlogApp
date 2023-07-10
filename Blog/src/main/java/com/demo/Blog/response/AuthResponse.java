@@ -48,4 +48,14 @@ public class AuthResponse {
     public void setToken(String token) {
         this.token = token;
     }
+
+    @Override
+    public String toString() {
+        return "AuthResponse{" +
+                "userId=" + userId +
+                ", message='" + message + '\'' +
+                ", userName='" + userName + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }
