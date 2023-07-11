@@ -1,6 +1,7 @@
 package com.demo.Blog.service;
 
 import com.demo.Blog.client.request.PaymentCardGetRequest;
+import com.demo.Blog.constants.Constant;
 import com.demo.Blog.converter.CardConverter;
 import com.demo.Blog.exception.card.CardNotFoundByUserIdException;
 import com.demo.Blog.exception.card.CardNotFoundException;
@@ -16,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CardService {
 
-    private static final String CARD_SAVED = "Card successfully saved!!";
     private final CardInfoRepository cardInfoRepository;
     private final CardConverter cardConverter;
 
@@ -33,7 +33,7 @@ public class CardService {
         CardInfo card = cardInfoRepository.save(cardConverter.convert(paymentCardGetRequest, user));
         logger.info("Card created: {}", card.getId());
         logger.info("saveCard method successfully worked");
-        return CARD_SAVED;
+        return Constant.Card.CARD_SAVED;
     }
 
     protected CardInfo getCardById(Long id) {

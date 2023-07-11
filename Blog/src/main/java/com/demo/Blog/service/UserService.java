@@ -1,5 +1,6 @@
 package com.demo.Blog.service;
 
+import com.demo.Blog.constants.Constant;
 import com.demo.Blog.converter.UserConverter;
 import com.demo.Blog.exception.messages.Messages;
 import com.demo.Blog.exception.user.*;
@@ -21,7 +22,6 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private static final String PASSWORD_UPDATED = "Your password is updated";
     private final UserRepository userRepository;
     private final UserConverter userConverter;
     private final PasswordEncoder passwordEncoder;
@@ -66,7 +66,7 @@ public class UserService {
         logger.info("User password updated: {} ", user.getId());
 
         logger.info("updateUserPassword method successfully worked");
-        return PASSWORD_UPDATED;
+        return Constant.User.PASSWORD_UPDATED;
     }
 
     @Transactional

@@ -79,7 +79,7 @@ public class TagService {
         Tag foundTag = tagRepository.findByName(tag).orElseThrow(() ->
                 new TagNotFoundGivenTagNameException(Messages.TAG.NOT_EXISTS_BY_NAME + tag));
 
-        logger.info("Found tagId: {}, by tag: {} ", foundTag.getId(), tag);
+        logger.info("Found tagId: {} , by tag: {} ", foundTag.getId(), tag);
 
         logger.info("findByName method successfully worked");
         return foundTag.getId();

@@ -5,6 +5,7 @@ import com.demo.Blog.client.converter.PaymentConverter;
 import com.demo.Blog.client.request.*;
 import com.demo.Blog.client.response.PaymentResponse;
 import com.demo.Blog.config.rabbitMQ.RabbitMQMailConfiguration;
+import com.demo.Blog.constants.Constant;
 import com.demo.Blog.converter.MailConverter;
 import com.demo.Blog.converter.MembershipConverter;
 import com.demo.Blog.exception.membership.MembershipNotFoundByUserIdException;
@@ -20,7 +21,6 @@ import com.demo.Blog.utils.MembershipUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,10 +39,6 @@ public class MembershipService {
     private final RabbitTemplate rabbitTemplate;
     private final MailConverter mailConverter;
     Logger logger = LoggerFactory.getLogger(getClass());
-    @Value("${membership.renewed.mail.message}")
-    private String MEMBERSHIP_RENEWED;
-    @Value("${membership.created.mail.message}")
-    private String MEMBERSHIP_CREATED;
 
     public MembershipService(CardService cardService, UserService userService, MembershipRepository membershipRepository, MembershipConverter membershipConverter, PaymentConverter paymentConverter, PaymentServiceClient paymentServiceClient, RabbitMQMailConfiguration rabbitMQMailConfiguration, RabbitTemplate rabbitTemplate, MailConverter mailConverter) {
         this.cardService = cardService;
@@ -68,13 +64,13 @@ public class MembershipService {
 
         logger.info("Payment request send to Payment Service");
         PaymentResponse paymentResponse = paymentServiceClient.create(paymentCardSendRequest);
-        logger.info("Payment response received from Payment Service");
+        logger.info("Payment response received from Payment Service response: {}", paymentResponse.getStatus());
         MembershipUtil.checkPaymentResponse(paymentResponse);
 
         Membership membership = membershipRepository.save(membershipConverter.convert(user));
         logger.info("Membership created: {} ", membership.getId());
 
-        rabbitHelper(user, MEMBERSHIP_CREATED);
+        rabbitHelper(user, Constant.Membership.MEMBERSHIP_CREATED);
 
         cardService.saveCard(paymentCardGetRequest, user);
         logger.info("createMembershipPayByCard method successfully worked");
@@ -100,7 +96,7 @@ public class MembershipService {
         Membership membership = membershipRepository.save(membershipConverter.convert(user));
         logger.info("Membership created: {} ", membership.getId());
 
-        rabbitHelper(user, MEMBERSHIP_CREATED);
+        rabbitHelper(user, Constant.Membership.MEMBERSHIP_CREATED);
         logger.info("createMembershipPayByTransfer method successfully worked");
         return paymentResponse;
     }
@@ -126,7 +122,7 @@ public class MembershipService {
         membershipRepository.save(membership);
         logger.info("Membership extended: {} ", membership.getId());
 
-        rabbitHelper(membership.getUser(), MEMBERSHIP_RENEWED);
+        rabbitHelper(membership.getUser(), Constant.Membership.MEMBERSHIP_RENEWED);
         logger.info("renewMembershipCardRequest method successfully worked");
         return paymentResponse;
     }
@@ -151,7 +147,7 @@ public class MembershipService {
         membershipRepository.save(membership);
         logger.info("Membership extended: {} ", membership.getId());
 
-        rabbitHelper(membership.getUser(), MEMBERSHIP_RENEWED);
+        rabbitHelper(membership.getUser(),  Constant.Membership.MEMBERSHIP_RENEWED);
         logger.info("renewMembershipTransferRequest method successfully worked");
         return paymentResponse;
     }
