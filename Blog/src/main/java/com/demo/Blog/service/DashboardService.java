@@ -29,6 +29,7 @@ public class DashboardService {
         this.membershipService = membershipService;
         this.paymentServiceClient = paymentServiceClient;
     }
+
     public List<UserResponse> getAllUsers() {
         logger.info("getAllUsers method started");
         logger.info("getAllUsers method successfully worked");
