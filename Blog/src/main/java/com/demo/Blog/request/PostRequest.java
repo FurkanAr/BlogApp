@@ -68,4 +68,15 @@ public class PostRequest {
     public void setTagIds(List<Long> tagIds) {
         this.tagIds = tagIds;
     }
+
+    @Override
+    public String toString() {
+        return "PostRequest{" +
+                "title='" + title + '\'' +
+                ", text='" + text + '\'' +
+                ", picture='" + picture + '\'' +
+                ", userId=" + userId +
+                ", tagIds=" + tagIds +
+                '}';
+    }
 }
