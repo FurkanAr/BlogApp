@@ -29,16 +29,14 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final PostConverter postConverter;
-    private final UserService userService;
     private final MembershipService membershipService;
     private final TagService tagService;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    public PostService(PostRepository postRepository, PostConverter postConverter, UserService userService, MembershipService membershipService, TagService tagService) {
+    public PostService(PostRepository postRepository, PostConverter postConverter, MembershipService membershipService, TagService tagService) {
         this.postRepository = postRepository;
         this.postConverter = postConverter;
-        this.userService = userService;
         this.membershipService = membershipService;
         this.tagService = tagService;
     }
@@ -49,17 +47,22 @@ public class PostService {
         logger.info("Post request: {} ", newPost);
 
         Membership membership = membershipService.getMembershipByUserId(newPost.getUserId());
+        logger.info("Membership found: {} ", membership.getId());
 
         if (MembershipUtil.isMembershipActive(membership)) {
             membershipService.deleteMembershipById(membership.getId());
+            logger.warn("Membership: {}, deleted", membership.getId());
             throw new MembershipIsExpiredException(Messages.Membership.EXPIRED);
         }
 
         List<Tag> tags = tagService.findAllById(newPost.getTagIds());
+        logger.info("Tags found: {} ", tags);
+        logger.info("membership getUser: {}", membership.getUser());
 
         checkUserCanCreateOrNotPost(membership.getUser().getId());
-
-        Post post = postRepository.save(postConverter.convert(newPost, membership.getUser(), tags));
+        Post p = postConverter.convert(newPost, membership.getUser(), tags);
+        logger.info("Post created p: {} ", p);
+        Post post = postRepository.save(p);
         logger.info("Post created: {} ", post.getId());
 
         logger.info("createPost method successfully worked");
@@ -132,17 +135,6 @@ public class PostService {
 
         logger.info("deletePostById method successfully worked");
         return post.getId().toString();
-    }
-
-    public void deleteByUserId(Long userId) {
-        logger.info("deleteByUserId method started");
-
-        userService.findUserById(userId);
-        List<Post> posts = postRepository.findAllByUserId(userId);
-        postRepository.deleteAll(posts);
-        logger.info("User: {}, all posts deleted ", userId);
-
-        logger.info("deleteByUserId method successfully worked");
     }
 
     private void checkUserCanCreateOrNotPost(Long userId) {

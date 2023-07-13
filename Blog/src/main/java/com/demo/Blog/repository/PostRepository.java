@@ -25,12 +25,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             @Param("firstDay") LocalDate firstDay,
             @Param("lastDay") LocalDate lastDay);
 
-    List<Post> findAllByUserId(Long userId);
-
-
     List<Post> findPostsByTagsId(Long tagId);
 
     List<Post> findByOrderByPublicationDateDesc();
 
-    List<Post> findByOrderByPublicationDateAsc();
 }
