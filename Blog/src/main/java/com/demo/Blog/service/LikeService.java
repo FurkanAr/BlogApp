@@ -111,12 +111,4 @@ public class LikeService {
         return like;
     }
 
-    public void deleteByUserId(Long userId) {
-        logger.info("deleteByUserId method started");
-        userService.findUserById(userId);
-        List<Like> likes = likeRepository.findAllByUserId(userId);
-        likeRepository.deleteAll(likes);
-        logger.info("User: {}, all likes deleted ", userId);
-        logger.info("deleteByUserId method successfully worked");
-    }
 }

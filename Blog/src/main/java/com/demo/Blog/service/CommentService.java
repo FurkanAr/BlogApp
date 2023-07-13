@@ -26,16 +26,14 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final CommentConverter commentConverter;
-    private final UserService userService;
     private final PostService postService;
     private final MembershipService membershipService;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    public CommentService(CommentRepository commentRepository, CommentConverter commentConverter, UserService userService, PostService postService, MembershipService membershipService) {
+    public CommentService(CommentRepository commentRepository, CommentConverter commentConverter, PostService postService, MembershipService membershipService) {
         this.commentRepository = commentRepository;
         this.commentConverter = commentConverter;
-        this.userService = userService;
         this.postService = postService;
         this.membershipService = membershipService;
     }
@@ -114,12 +112,4 @@ public class CommentService {
 
     }
 
-    public void deleteByUserId(Long userId) {
-        logger.info("deleteByUserId method started");
-        userService.findUserById(userId);
-        List<Comment> comments = commentRepository.findByUserId(userId);
-        commentRepository.deleteAll(comments);
-        logger.info("User: {}, all comments deleted ", userId);
-        logger.info("deleteByUserId method successfully worked");
-    }
 }
