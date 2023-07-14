@@ -8,7 +8,7 @@ The subject of this project is to build the system for blog application with jav
 ## Screenshots
 
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![microservice_diagram](https://github.com/FurkanAr/BlogApp/assets/63981707/114db51a-52aa-46de-9227-18a716576a86)
 
 ## Requirements
 
