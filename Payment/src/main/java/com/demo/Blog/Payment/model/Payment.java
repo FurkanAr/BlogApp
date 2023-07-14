@@ -40,8 +40,7 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(Long id, LocalDateTime createdDate, Long userId, String userName, PaymentType paymentType, Double price, String userAccountNumber, String userCardNumber, PaymentStatus status, String message) {
-        this.id = id;
+    public Payment(LocalDateTime createdDate, Long userId, String userName, PaymentType paymentType, Double price, String userAccountNumber, String userCardNumber, PaymentStatus status, String message) {
         this.createdDate = createdDate;
         this.userId = userId;
         this.userName = userName;

@@ -4,7 +4,6 @@ import com.demo.Blog.Payment.converter.PaymentConverter;
 import com.demo.Blog.Payment.exception.PaymentNotFoundException;
 import com.demo.Blog.Payment.exception.messages.Messages;
 import com.demo.Blog.Payment.model.Payment;
-import com.demo.Blog.Payment.model.enums.PaymentStatus;
 import com.demo.Blog.Payment.repository.PaymentRepository;
 import com.demo.Blog.Payment.request.PaymentCarSendRequest;
 import com.demo.Blog.Payment.request.PaymentTransferSendRequest;
@@ -85,13 +84,12 @@ public class PaymentService {
     public BigDecimal getTotalPrice() {
         logger.info("getTotalPrice method started");
 
-        BigDecimal total = paymentRepository.sumTotal();;
+        BigDecimal total = paymentRepository.sumTotal();
         logger.info("Total price: {} ", total);
 
         logger.info("getTotalPrice method successfully worked");
         return total;
     }
-
 
     public BigDecimal getOneUserPayment(Long userId) {
         logger.info("getOneUserPayment method started");

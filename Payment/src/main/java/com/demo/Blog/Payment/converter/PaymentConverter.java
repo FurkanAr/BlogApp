@@ -1,5 +1,6 @@
 package com.demo.Blog.Payment.converter;
 
+import com.demo.Blog.Payment.constants.Constant;
 import com.demo.Blog.Payment.model.Payment;
 import com.demo.Blog.Payment.model.enums.PaymentStatus;
 import com.demo.Blog.Payment.model.enums.PaymentType;
@@ -14,12 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Component
 public class PaymentConverter {
-
-    private static final String MESSAGE = "Payment failed, try again!";
-    private static final String NO_USAGE_CARD_TRANSFER = "No information";
-    private static final Double PRICE = 39.99;
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -28,13 +26,13 @@ public class PaymentConverter {
         Payment payment = new Payment();
         payment.setPaymentType(PaymentType.TRANSFER);
         payment.setCreatedDate(LocalDateTime.now());
-        payment.setPrice(PRICE);
+        payment.setPrice(Constant.Payment.PRICE);
         payment.setUserId(paymentTransferSendRequest.getUserId());
         payment.setUserName(paymentTransferSendRequest.getUserName());
         payment.setUserAccountNumber(paymentTransferSendRequest.getAccountNumberFrom());
-        payment.setUserCardNumber(NO_USAGE_CARD_TRANSFER);
+        payment.setUserCardNumber(Constant.Payment.NO_USAGE_CARD_TRANSFER);
         payment.setStatus(PaymentStatus.REFUSED);
-        payment.setMessage(MESSAGE);
+        payment.setMessage(Constant.Payment.REFUSED_MESSAGE);
         logger.info("convert to Payment method successfully worked");
         return payment;
     }
@@ -44,13 +42,13 @@ public class PaymentConverter {
         Payment payment = new Payment();
         payment.setPaymentType(PaymentType.CARD);
         payment.setCreatedDate(LocalDateTime.now());
-        payment.setPrice(PRICE);
+        payment.setPrice(Constant.Payment.PRICE);
         payment.setUserId(paymentCarSendRequest.getUserId());
         payment.setUserName(paymentCarSendRequest.getUserName());
-        payment.setUserAccountNumber(NO_USAGE_CARD_TRANSFER);
+        payment.setUserAccountNumber(Constant.Payment.NO_USAGE_CARD_TRANSFER);
         payment.setUserCardNumber(paymentCarSendRequest.getCardNo());
         payment.setStatus(PaymentStatus.REFUSED);
-        payment.setMessage(MESSAGE);
+        payment.setMessage(Constant.Payment.REFUSED_MESSAGE);
         logger.info("convert to Payment method successfully worked");
         return payment;
     }
