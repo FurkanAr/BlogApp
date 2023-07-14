@@ -1,0 +1,1697 @@
+{
+	"info": {
+		"_postman_id": "98ad5cf4-600a-441c-afb3-33a531a7a8d7",
+		"name": "Blog App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19630129"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "http://localhost:9090/posts",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/posts/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"java101\",\r\n    \"text\": \"java 101\",\r\n    \"picture\": \"java101.jpg\",\r\n    \"userId\": 45,\r\n    \"tagIds\" : [\r\n        2,3\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"posts"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/posts/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/posts/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"python learning\",\r\n    \"text\": \"python 101\",\r\n    \"picture\": \"python101.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/posts/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/posts/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/posts/month",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/posts/month",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"posts",
+								"month"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/posts/category?tag=java",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/posts/category?tag=java",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"posts",
+								"category"
+							],
+							"query": [
+								{
+									"key": "tag",
+									"value": "java"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "http://localhost:9090/users/3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/users/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"users",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/users/update/password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"user\",\r\n    \"newPassword\": \"Test_password123\",\r\n    \"oldPassword\": \"user123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/users/update/password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"users",
+								"update",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/users/update/username",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldUserName\": \"user\",\r\n    \"newUserName\": \"farfara\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/users/update/username",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"users",
+								"update",
+								"username"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/users/update/email",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldEmail\": \"user@gmail.com\",\r\n    \"newEmail\": \"farfara@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/users/update/email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"users",
+								"update",
+								"email"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "http://localhost:9090/auth/register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"funda\",\r\n    \"fullName\": \"funda ak\",\r\n    \"email\": \"fundaak@gmail.com\",\r\n    \"password\": \"Funda-ak123\",\r\n    \"role\" : \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/auth/login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"funda\",\r\n    \"password\": \"Funda-ak123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Like",
+			"item": [
+				{
+					"name": "http://localhost:9090/likes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postId\": 2,\r\n    \"userId\": 45 \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/likes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"likes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/likes?userId=45&postId=2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/likes?userId=45&postId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"likes"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "45"
+								},
+								{
+									"key": "postId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/likes?userId=45",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/likes?userId=45",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"likes"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "45"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/likes?postId=2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5peiIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjQ1IiwiZW1haWwiOiJkZW5pekBnbWFpbC5jb20iLCJpYXQiOjE2ODc1NTA1NzcsImV4cCI6MTY4NzU1MjAxN30.D8gTIdupw96nkKXrFkzdgIC3L1noAYNDtdVczrmxNh8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/likes?postId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"likes"
+							],
+							"query": [
+								{
+									"key": "postId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/likes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/likes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"likes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/likes/5",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/likes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"likes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/likes/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/likes/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"likes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "http://localhost:9090/comments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNTMwNzYsImV4cCI6MTY4OTM1NDUxNn0.2ipitADvNZy-cqRbDdERO0OTiT5Dbg78Wdl-a7tu-UY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"postId\": 1,\r\n    \"userId\": 2,\r\n    \"text\": \"çok başarılı\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/comments/2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNTMwNzYsImV4cCI6MTY4OTM1NDUxNn0.2ipitADvNZy-cqRbDdERO0OTiT5Dbg78Wdl-a7tu-UY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/comments/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"comments",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/comments/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNTMwNzYsImV4cCI6MTY4OTM1NDUxNn0.2ipitADvNZy-cqRbDdERO0OTiT5Dbg78Wdl-a7tu-UY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"beğendim\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/comments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/comments/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNTMwNzYsImV4cCI6MTY4OTM1NDUxNn0.2ipitADvNZy-cqRbDdERO0OTiT5Dbg78Wdl-a7tu-UY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/comments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"comments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/comments?userId=2&postId=1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/comments?userId=2&postId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								},
+								{
+									"key": "postId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/comments?userId=2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/comments?userId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2"
+								},
+								{
+									"key": "postId",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/comments?postId=1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/comments?postId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "postId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Membership",
+			"item": [
+				{
+					"name": "http://localhost:9090/memberships/renew/card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5peiIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjQ1IiwiZW1haWwiOiJkZW5pekBnbWFpbC5jb20iLCJpYXQiOjE2ODc1NDk0OTMsImV4cCI6MTY4NzU1MDkzM30.immnlWF7qheU0ZoSEAMXHix4igiVtcN8PL8D7PX5N-M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardId\": 1,\r\n    \"userId\": 45\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/memberships/renew/card",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"memberships",
+								"renew",
+								"card"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/memberships/start/card",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5peiIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjQ1IiwiZW1haWwiOiJkZW5pekBnbWFpbC5jb20iLCJpYXQiOjE2ODc1NDk0OTMsImV4cCI6MTY4NzU1MDkzM30.immnlWF7qheU0ZoSEAMXHix4igiVtcN8PL8D7PX5N-M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardNo\": \"4441113332\",\r\n    \"expireDate\": \"2023-08-12\",\r\n    \"cvcNo\": \"131\",\r\n    \"userId\": 45\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/memberships/start/card",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"memberships",
+								"start",
+								"card"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/memberships/start/transfer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5peiIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjQ1IiwiZW1haWwiOiJkZW5pekBnbWFpbC5jb20iLCJpYXQiOjE2ODc1NDk0OTMsImV4cCI6MTY4NzU1MDkzM30.immnlWF7qheU0ZoSEAMXHix4igiVtcN8PL8D7PX5N-M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountNumberFrom\": \"TR 000212564899147532\",\r\n    \"accountNumberTo\": \"TR 090002562311458900\",\r\n    \"firmName\": \"MEDIUM\",\r\n    \"userId\": 45\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/memberships/start/transfer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"memberships",
+								"start",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/memberships/renew/transfer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5peiIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjQ1IiwiZW1haWwiOiJkZW5pekBnbWFpbC5jb20iLCJpYXQiOjE2ODc1NDk0OTMsImV4cCI6MTY4NzU1MDkzM30.immnlWF7qheU0ZoSEAMXHix4igiVtcN8PL8D7PX5N-M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountNumberFrom\": \"TR 000212564899147532\",\r\n    \"accountNumberTo\": \"TR 090002562311458900\",\r\n    \"firmName\": \"MEDIUM\",\r\n    \"userId\": 45\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/memberships/renew/transfer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"memberships",
+								"renew",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/memberships",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5peiIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjQ1IiwiZW1haWwiOiJkZW5pekBnbWFpbC5jb20iLCJpYXQiOjE2ODg0MDY4NDgsImV4cCI6MTY4ODQwODI4OH0.uSFhZIQT0l7TpMZiREGRSDIrv9nAq58GVpE82cBH6rk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/memberships",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"memberships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/memberships/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaXNzIjoiQmxvZy5hcHAiLCJyb2xlcyI6IlVTRVIiLCJ1c2VySWQiOiIyIiwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTY4NzEwNjU5NywiZXhwIjoxNjg3MTA4MDM3fQ.ZVo-_cN-Uc5iFyXEfZZz80xbRZpja-f7Hd2TRtvUFQs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/memberships/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"memberships",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/memberships/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaXNzIjoiQmxvZy5hcHAiLCJyb2xlcyI6IlVTRVIiLCJ1c2VySWQiOiIyIiwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTY4NzEwNjU5NywiZXhwIjoxNjg3MTA4MDM3fQ.ZVo-_cN-Uc5iFyXEfZZz80xbRZpja-f7Hd2TRtvUFQs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/memberships/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"memberships",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/memberships/users?userId=1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaXNzIjoiQmxvZy5hcHAiLCJyb2xlcyI6IlVTRVIiLCJ1c2VySWQiOiIyIiwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsImlhdCI6MTY4NzQ2MjYzNSwiZXhwIjoxNjg3NDY0MDc1fQ.s5F8hypAjgQsW94-GZM5RsNIEH5GCkwocUftepokcQo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/memberships/users?userId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"memberships",
+								"users"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tag",
+			"item": [
+				{
+					"name": "http://localhost:9090/tags",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNTMwNzYsImV4cCI6MTY4OTM1NDUxNn0.2ipitADvNZy-cqRbDdERO0OTiT5Dbg78Wdl-a7tu-UY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/tags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/tags",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNTMwNzYsImV4cCI6MTY4OTM1NDUxNn0.2ipitADvNZy-cqRbDdERO0OTiT5Dbg78Wdl-a7tu-UY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"java\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9090/tags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"tags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AdminDashboard",
+			"item": [
+				{
+					"name": "http://localhost:9090/dashboard/users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/dashboard/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"dashboard",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/dashboard/users/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/dashboard/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"dashboard",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/dashboard/users/total",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/dashboard/users/total",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"dashboard",
+								"users",
+								"total"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/dashboard/posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/dashboard/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"dashboard",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/dashboard/memberships",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/dashboard/memberships",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"dashboard",
+								"memberships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/dashboard/memberships/10",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/dashboard/memberships/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"dashboard",
+								"memberships",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/dashboard/memberships/total",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/dashboard/memberships/total",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"dashboard",
+								"memberships",
+								"total"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/dashboard/payments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/dashboard/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"dashboard",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/dashboard/payments/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/dashboard/payments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"dashboard",
+								"payments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/dashboard/payments/total",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/dashboard/payments/total",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"dashboard",
+								"payments",
+								"total"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:9090/dashboard/payments/users/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmdW5kYSIsImlzcyI6IkJsb2cuYXBwIiwicm9sZXMiOiJBRE1JTiIsInVzZXJJZCI6IjEzNyIsImVtYWlsIjoiZnVuZGFha0BnbWFpbC5jb20iLCJpYXQiOjE2ODkzNDY1OTEsImV4cCI6MTY4OTM0ODAzMX0.5l4xOlkMdwoRn-olcHBGiuhjwDow28ed2fr1KXSae18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/dashboard/payments/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"dashboard",
+								"payments",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
