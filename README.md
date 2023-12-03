@@ -66,6 +66,6 @@ The subject of this project is to build the system for blog application with jav
 
 • Postman
 
-## Authors
+## Author
 
 - [@Furkan Ar](https://www.github.com/FurkanAr)
